@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(LineRenderer))]
-public class Laser : MonoBehaviour
+public class Laser : Triggerable
 {
 
     private LineRenderer _lineRenderer;  // To edit the line renderer to shoot the laser
@@ -22,6 +22,15 @@ public class Laser : MonoBehaviour
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        UpdateLaserVisual();
+    }
+
+    /// <summary>
+    /// Toggles the laser from the on to off state, or vice versa.
+    /// </summary>
+    public override void Interact()
+    {
+        IsLaserActive = !IsLaserActive;
     }
 
     /// <summary>
@@ -33,22 +42,24 @@ public class Laser : MonoBehaviour
     /// </summary>
     public void UpdateLaserVisual()
     {
-        if (IsLaserActive) {
-            _lineRenderer.SetPositions(null);
+        // If the laser is inactive, set the positions to an empty list
+        if (!_isLaserActive) {
+            _lineRenderer.positionCount = 0;
+            _lineRenderer.SetPositions(new Vector3[] { });
             return; 
         }
+        // Or else, try to render a hit, and shoot a laser off in that direction
+        _lineRenderer.positionCount = 2;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground"));
         if (hit)
         {
-            Vector3[] positions = { transform.position, hit.point + (Vector2)transform.right };
-            _lineRenderer.SetPositions(positions);
+            _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right });
         }
         else
         {
             // If no hit, set the end point far in the direction
             Vector3 endPoint = transform.position + transform.right * 99;
-            Vector3[] positions = { transform.position, endPoint };
-            _lineRenderer.SetPositions(positions);
+            _lineRenderer.SetPositions(new Vector3[] { transform.position, endPoint });
         }
     }
 
