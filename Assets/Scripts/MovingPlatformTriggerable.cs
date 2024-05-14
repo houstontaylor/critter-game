@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingPlatform : MonoBehaviour
+public class MovingPlatform : Triggerable
 {
     public float speed = 1.0f;
     List<Vector3> controlPoints = new List<Vector3>();
     int currentControlPoint = 0;
 
     List<GameObject> passengers = new List<GameObject>();
+
+    public bool isMoving = true;
 
     void Start()
     {
@@ -41,11 +43,19 @@ public class MovingPlatform : MonoBehaviour
             }
         }
         // Move towards the control point
-        Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
-        transform.position += speed * Time.deltaTime * direction;
-        foreach (GameObject passenger in passengers)
+        if (isMoving)
         {
-            passenger.transform.position += speed * Time.deltaTime * direction;
+            Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
+            transform.position += speed * Time.deltaTime * direction;
+            foreach (GameObject passenger in passengers)
+            {
+                passenger.transform.position += speed * Time.deltaTime * direction;
+            }
         }
+    }
+
+    public override void Interact()
+    {
+        isMoving = !isMoving;
     }
 }
