@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +7,12 @@ public class Footsteps : MonoBehaviour
     public AudioSource audioSource; // Reference to the AudioSource footsteps component
     public Rigidbody2D rb2D; // Reference to the critter
 
+    public AudioClip[] footstepNoises;
+    public float footstepVolume;
+    private float _delaySinceLastFootstep;
+
+    private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;
+
     void Start()
     {
         // Initialize the AudioSource and Rigidbody2D components if not set
@@ -15,26 +20,15 @@ public class Footsteps : MonoBehaviour
             audioSource = GetComponent<AudioSource>();
         if (rb2D == null)
             rb2D = GetComponent<Rigidbody2D>();
-
-        audioSource.loop = true; // Set the audio to loop
     }
 
     void Update()
     {
         // Check if the player is moving
-        if (Input.GetAxis("Horizontal") != 0) // Adjust the threshold as needed
+        if (Input.GetAxis("Horizontal") != 0 && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES) // Adjust the threshold as needed
         {
-            if (!audioSource.isPlaying)
-            {
-                audioSource.Play(); // Start playing the loop if it is not already playing
-            }
-        }
-        else
-        {
-            if (audioSource.isPlaying)
-            {
-                audioSource.Pause(); // Pause the loop if the player stops moving
-            }
+            audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
+            _delaySinceLastFootstep = Time.time;
         }
     }
 }
