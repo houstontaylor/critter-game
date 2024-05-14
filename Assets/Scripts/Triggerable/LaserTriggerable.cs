@@ -46,6 +46,7 @@ public class Laser : Triggerable
         {
             playerController.Respawn();
         }
+        UpdateLaserVisual();  // This will be unperformant but it works!
     }
 
     /// <summary>
@@ -69,7 +70,7 @@ public class Laser : Triggerable
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground"));
         if (hit)
         {
-            _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right });
+            _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right * 0.1f });
             _laserParticles.transform.position = hit.point;
             _laserParticles.Play();
         }
