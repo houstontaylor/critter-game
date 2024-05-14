@@ -8,6 +8,8 @@ public class MovingPlatform : MonoBehaviour
     List<Vector3> controlPoints = new List<Vector3>();
     int currentControlPoint = 0;
 
+    List<GameObject> passengers = new List<GameObject>();
+
     void Start()
     {
         Transform controlsPointsParent = transform.Find("ControlPoints");
@@ -17,7 +19,16 @@ public class MovingPlatform : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        passengers.Add(collision.gameObject);
+    }
+
+    void OnCollisionExit2D(Collision2D collision)
+    {
+        passengers.Remove(collision.gameObject);
+    }
+
     void Update()
     {
         // If we're at the control point, move to the next one
@@ -30,6 +41,11 @@ public class MovingPlatform : MonoBehaviour
             }
         }
         // Move towards the control point
-        transform.position = Vector3.MoveTowards(transform.position, controlPoints[currentControlPoint], speed * Time.deltaTime);
+        Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
+        transform.position += speed * Time.deltaTime * direction;
+        foreach (GameObject passenger in passengers)
+        {
+            passenger.transform.position += speed * Time.deltaTime * direction;
+        }
     }
 }
