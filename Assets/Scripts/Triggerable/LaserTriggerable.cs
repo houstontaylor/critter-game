@@ -6,8 +6,10 @@ using UnityEngine;
 public class Laser : Triggerable
 {
 
-    private LineRenderer _lineRenderer;  // To edit the line renderer to shoot the laser
+    [Header("Particle System Assignment")]
+    public ParticleSystem _laserParticles;
 
+    [Header("Laser Properties")]
     [SerializeField] private bool _isLaserActive = true;
     public bool IsLaserActive
     {
@@ -18,6 +20,8 @@ public class Laser : Triggerable
             UpdateLaserVisual();  // Update the laser visual when this value is modified
         }
     }
+
+    private LineRenderer _lineRenderer;  // To edit the line renderer to shoot the laser
 
     private void Awake()
     {
@@ -57,6 +61,7 @@ public class Laser : Triggerable
         if (!_isLaserActive) {
             _lineRenderer.positionCount = 0;
             _lineRenderer.SetPositions(new Vector3[] { });
+            _laserParticles.Stop();
             return; 
         }
         // Or else, try to render a hit, and shoot a laser off in that direction
@@ -65,6 +70,8 @@ public class Laser : Triggerable
         if (hit)
         {
             _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right });
+            _laserParticles.transform.position = hit.point;
+            _laserParticles.Play();
         }
         else
         {
