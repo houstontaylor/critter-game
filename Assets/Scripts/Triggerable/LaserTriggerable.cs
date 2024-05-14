@@ -33,6 +33,17 @@ public class Laser : Triggerable
         IsLaserActive = !IsLaserActive;
     }
 
+    private void Update()
+    {
+        if (!IsLaserActive) { return; }
+        // Make the player respawn if the laser raycasts hits them.
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99);
+        if (hit && hit.transform.gameObject.TryGetComponent(out PlayerController playerController))
+        {
+            playerController.Respawn();
+        }
+    }
+
     /// <summary>
     /// Should be called any time this laser should be updated.
     /// Automatically called any time the laser's active boolean is toggled.
