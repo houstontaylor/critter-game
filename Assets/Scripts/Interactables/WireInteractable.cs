@@ -5,7 +5,7 @@ using UnityEngine;
 public class WireInteractable : Interactable
 {
 
-    [Header("Laser Assignment")]
+    [Header("Trigger Assignment")]
     public Triggerable TriggerableToTrigger;
     public bool OnlyWorksOnce = true;  // Set to true if this should only trigger ONCE
 
@@ -20,7 +20,7 @@ public class WireInteractable : Interactable
     {
         if (IsInteractable && Input.GetKeyDown(KeyCode.E))
         {
-            if (TriggerableToTrigger != null && (OnlyWorksOnce && !_wasActivated))
+            if (TriggerableToTrigger != null && (!OnlyWorksOnce || !_wasActivated))
             {
                 _wasActivated = true;
                 TriggerableToTrigger.Interact();
