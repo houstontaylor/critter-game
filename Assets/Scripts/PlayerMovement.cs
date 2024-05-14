@@ -7,6 +7,7 @@ using UnityEngine;
 /// </summary>
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
+[RequireComponent(typeof(AudioSource))]
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -14,14 +15,24 @@ public class PlayerMovement : MonoBehaviour
     [Tooltip("How fast the player moves")] public float MoveSpeed;
     [Tooltip("How high the player jumps")] public float JumpPower;
     
+    [Header("Footstep Audio Assignments")]
+    public AudioClip[] footstepNoises;
+    public float footstepVolume;
+
     private Vector2 _initialScale;  // Used to flip the player left-right according to scale
     private Rigidbody2D _rb2D;  // Used to adjust the player's velocity
     private BoxCollider2D _boxCollider;  // Used for specific raycast information
+    private AudioSource _audioSource;  // For playing sounds for footsteps
+    private float _delaySinceLastFootstep;  // Recorded delay since last footstep SFX played
+
+    private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
+
 
     private void Awake()
     {
         _initialScale = transform.localScale;
         _rb2D = GetComponent<Rigidbody2D>();
+        _audioSource = GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
     }
 
@@ -55,6 +66,12 @@ public class PlayerMovement : MonoBehaviour
             else
             {
                 transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
+            }
+            // If the player is not in the air, play some footstep noises
+            if (IsGrounded() && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES)
+            {
+                _audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
+                _delaySinceLastFootstep = Time.time;
             }
         }
     }

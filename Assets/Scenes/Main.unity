@@ -2698,7 +2698,6 @@ GameObject:
   - component: {fileID: 1351300270}
   - component: {fileID: 1351300269}
   - component: {fileID: 1351300275}
-  - component: {fileID: 1351300274}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2872,18 +2871,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MoveSpeed: 7
   JumpPower: 12
---- !u!114 &1351300274
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351300267}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 605c56e68942f144db260279d9df1511, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
   footstepNoises:
   - {fileID: 8300000, guid: 3e1c13063697eb74ca3a4cd2fb2f6ab8, type: 3}
   - {fileID: 8300000, guid: cedb7c5a448f47a4a8922e3c56a26c12, type: 3}
