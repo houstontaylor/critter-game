@@ -69,15 +69,21 @@ public class PlayerMovement : MonoBehaviour
             {
                 transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
             }
-            // If the player is not in the air, play some footstep noises
-            if (IsGrounded() && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES)
+
+            // Check if the footstepNoises array is not empty
+            if (footstepNoises != null && footstepNoises.Length > 0)
             {
-                _audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
-                _delaySinceLastFootstep = Time.time;
+                // If the player is not in the air, play some footstep noises
+                if (IsGrounded() && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES)
+                {
+                    _audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
+                    _delaySinceLastFootstep = Time.time;
+                }
             }
         }
         animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
+
 
     /// <summary>
     /// Handles the player's jumping mechanic.
