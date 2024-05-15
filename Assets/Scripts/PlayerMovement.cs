@@ -35,6 +35,7 @@ public class PlayerMovement : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
+        animator = GetComponent<Animator>();
     }
 
     private void Update()
