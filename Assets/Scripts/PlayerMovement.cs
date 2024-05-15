@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
 
     private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
 
+    Animator animator;
 
     private void Awake()
     {
@@ -74,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
                 _delaySinceLastFootstep = Time.time;
             }
         }
+        animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
 
     /// <summary>
@@ -85,6 +87,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, JumpPower);
+            animator.Play("Critter_Jump");
         }
     }
 
