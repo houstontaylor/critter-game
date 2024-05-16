@@ -8,8 +8,6 @@ public class MovingPlatform : Triggerable
     List<Vector3> controlPoints = new List<Vector3>();
     int currentControlPoint = 0;
 
-    List<GameObject> passengers = new List<GameObject>();
-
     public bool isMoving = true;
 
     void Start()
@@ -19,16 +17,6 @@ public class MovingPlatform : Triggerable
         {
             controlPoints.Add(child.position);
         }
-    }
-
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        passengers.Add(collision.gameObject);
-    }
-
-    void OnCollisionExit2D(Collision2D collision)
-    {
-        passengers.Remove(collision.gameObject);
     }
 
     void Update()
@@ -47,10 +35,6 @@ public class MovingPlatform : Triggerable
         {
             Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
             transform.position += speed * Time.deltaTime * direction;
-            foreach (GameObject passenger in passengers)
-            {
-                passenger.transform.position += speed * Time.deltaTime * direction;
-            }
         }
     }
 
