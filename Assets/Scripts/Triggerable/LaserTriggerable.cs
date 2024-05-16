@@ -17,7 +17,7 @@ public class Laser : Triggerable
         set
         {
             _isLaserActive = value;
-            UpdateLaserVisual();  // Update the laser visual when this value is modified
+            UpdateLaser();  // Update the laser visual when this value is modified
         }
     }
 
@@ -26,7 +26,7 @@ public class Laser : Triggerable
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
-        UpdateLaserVisual();
+        UpdateLaser();
     }
 
     /// <summary>
@@ -40,13 +40,7 @@ public class Laser : Triggerable
     private void Update()
     {
         if (!IsLaserActive) { return; }
-        // Make the player respawn if the laser raycasts hits them.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99);
-        if (hit && hit.transform.gameObject.TryGetComponent(out PlayerController playerController))
-        {
-            playerController.Respawn();
-        }
-        UpdateLaserVisual();  // This will be unperformant but it works!
+        UpdateLaser();  // This will be unperformant but it works!
     }
 
     /// <summary>
@@ -56,7 +50,7 @@ public class Laser : Triggerable
     /// 
     /// If the laser is inactive, does not render the laser.
     /// </summary>
-    public void UpdateLaserVisual()
+    public void UpdateLaser()
     {
         // If the laser is inactive, set the positions to an empty list
         if (!_isLaserActive) {
@@ -67,12 +61,17 @@ public class Laser : Triggerable
         }
         // Or else, try to render a hit, and shoot a laser off in that direction
         _lineRenderer.positionCount = 2;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground"));
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground") | LayerMask.GetMask("Player"));
         if (hit)
         {
             _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right * 0.1f });
             _laserParticles.transform.position = hit.point;
             _laserParticles.Play();
+
+            // Make the player respawn if the laser raycasts hits them.
+            if (hit.transform.gameObject.TryGetComponent(out PlayerController playerController)) {
+                playerController.Respawn();
+            }
         }
         else
         {
