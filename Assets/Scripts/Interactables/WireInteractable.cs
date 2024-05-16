@@ -40,6 +40,7 @@ public class WireInteractable : Interactable
                 ShouldShowPopup = false;  //  Hide popup if this has been interacted with
                                           //  and it should only be interacted with ONCE
                 PopupObject.SetActive(false);
+
                 // plays chewing animation
                 if (_playerAnimator != null)
                 {
