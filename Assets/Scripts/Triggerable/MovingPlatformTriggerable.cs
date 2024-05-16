@@ -19,7 +19,7 @@ public class MovingPlatform : Triggerable
         }
     }
 
-    void Update()
+    void FixedUpdate()
     {
         // If we're at the control point, move to the next one
         if (Vector3.Distance(transform.position, controlPoints[currentControlPoint]) < 0.1f)
@@ -35,6 +35,13 @@ public class MovingPlatform : Triggerable
         {
             Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
             transform.position += speed * Time.deltaTime * direction;
+
+            // Move the passengers
+            gameObject.TryGetComponent<Ridable>(out Ridable ridable);
+            if (ridable != null)
+            {
+                ridable.MovePassengers(speed * Time.deltaTime * direction);
+            }
         }
     }
 

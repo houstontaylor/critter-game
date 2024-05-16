@@ -5,12 +5,6 @@ using UnityEngine;
 public class Ridable : MonoBehaviour
 {
     List<GameObject> passengers = new List<GameObject>();
-    Vector3 lastPosition;
-
-    void Start()
-    {
-        lastPosition = transform.position;
-    }
 
     void OnCollisionEnter2D(Collision2D collision)
     {
@@ -24,12 +18,19 @@ public class Ridable : MonoBehaviour
         passengers.Remove(collision.gameObject);
     }
 
-    void FixedUpdate()
+    public void MovePassengers(Vector3 delta)
     {
         foreach (GameObject passenger in passengers)
         {
-            passenger.transform.position += transform.position - lastPosition;
+            // Move the passenger
+            passenger.transform.position += delta;
+
+            // and its children
+            passenger.TryGetComponent<Ridable>(out Ridable ridable);
+            if (ridable != null)
+            {
+                ridable.MovePassengers(delta);
+            }
         }
-        lastPosition = transform.position;
     }
 }
