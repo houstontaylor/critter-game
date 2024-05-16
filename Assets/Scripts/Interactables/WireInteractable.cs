@@ -12,6 +12,20 @@ public class WireInteractable : Interactable
 
     private bool _wasActivated = false;
 
+    // player animation 
+    private Animator _playerAnimator;
+
+    void Start()
+    {
+        // Find the player by tag and get the Animator component
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player != null)
+        {
+            _playerAnimator = player.GetComponent<Animator>();
+        }
+    }
+
+
     /// <summary>
     /// If this wire interactable is within range of the player, 
     /// and the player presses "E", then toggle the laser this
@@ -26,6 +40,12 @@ public class WireInteractable : Interactable
                 ShouldShowPopup = false;  //  Hide popup if this has been interacted with
                                           //  and it should only be interacted with ONCE
                 PopupObject.SetActive(false);
+                // plays chewing animation
+                if (_playerAnimator != null)
+                {
+                    _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
+                }
+
                 // Turns the wires gray; this can be deleted later
                 GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.8f, 0.8f);  
             }
