@@ -23,6 +23,11 @@ public class SaveZone : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         foreach (GameObject obj in ObjectsToReset)
         {
+            if (obj == null)
+            {
+                Debug.LogWarning("Object to reset is null. Please assign a GameObject to reset.");
+                continue;
+            }
             _savedObjectPositions.Add(obj.transform.position);
         }
     }
