@@ -28,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
 
     private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
+    private const float ALLOWED_JUMP_HOLD_TIME = 0.3f;  // TODO
 
     private void Awake()
     {
@@ -93,8 +94,22 @@ public class PlayerMovement : MonoBehaviour
     {
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
-            _rb2D.velocity = new Vector2(_rb2D.velocity.x, JumpPower);
+            StartCoroutine(RenderJumpCoroutine());
             _animator.Play("Critter_Jump");
+        }
+    }
+
+    /// <summary>
+    /// Adds upward force to the player while the jump button is held, until a certain
+    /// time is reached. Longer presses = higher jumps.
+    /// </summary>
+    private IEnumerator RenderJumpCoroutine()
+    {
+        float startTime = Time.time;
+        while (Input.GetButton("Jump") && Time.time - startTime < ALLOWED_JUMP_HOLD_TIME)
+        {
+            _rb2D.velocity = new Vector2(_rb2D.velocity.x, JumpPower);
+            yield return null;
         }
     }
 
