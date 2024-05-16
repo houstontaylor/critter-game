@@ -29,4 +29,9 @@ public class FadeZone : MonoBehaviour
         _globalFadeImage.color = new Color(0, 0, 0, Mathf.Clamp(fadeAlpha, 0, 1));
     }
 
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        _globalFadeImage.color = Color.clear;
+    }
+
 }
