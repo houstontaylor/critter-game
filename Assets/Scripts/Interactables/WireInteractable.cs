@@ -12,8 +12,8 @@ public class WireInteractable : Interactable
 
     private bool _wasActivated = false;
 
-    private PlayerController _playerController;  // Player controller for status
-    private PlayerMovement _playerMovement;  // Player movement to lock movement
+    // player animation 
+    private Animator _playerAnimator;
 
     void Start()
     {
@@ -21,8 +21,7 @@ public class WireInteractable : Interactable
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            _playerController = player.GetComponent<PlayerController>();
-            _playerMovement = player.GetComponent<PlayerMovement>();
+            _playerAnimator = player.GetComponent<Animator>();
         }
     }
 
@@ -36,13 +35,17 @@ public class WireInteractable : Interactable
     {
         if (IsInteractable && Input.GetKeyDown(KeyCode.E))
         {
-            if (!OnlyWorksOnce || _wasActivated)
+            if (OnlyWorksOnce)
             {
                 ShouldShowPopup = false;  //  Hide popup if this has been interacted with
                                           //  and it should only be interacted with ONCE
                 PopupObject.SetActive(false);
 
-                StartCoroutine(LockPlayerMovementUntilWireChewedCoroutine());
+                // plays chewing animation
+                if (_playerAnimator != null)
+                {
+                    _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
+                }
 
                 // Turns the wires gray; this can be deleted later
                 GetComponent<SpriteRenderer>().color = new Color(0.8f, 0.8f, 0.8f);  
@@ -53,15 +56,6 @@ public class WireInteractable : Interactable
                 TriggerableToTrigger.Interact();
             }
         }
-    }
-
-    private IEnumerator LockPlayerMovementUntilWireChewedCoroutine()
-    {
-        _playerController.PlayAnimation("Critter_Chew");  // Play the chew animation
-        _playerMovement.CanMove = false;
-        yield return new WaitForSeconds(1);
-        _playerMovement.CanMove = true;
-
     }
 
 }

@@ -11,7 +11,7 @@ public class SaveZone : MonoBehaviour
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
 
-    private readonly List<Vector3> _savedObjectPositions = new();
+    private List<Vector3> _savedObjectPositions = new();
 
     private PlayerController _playerController;
 
@@ -23,11 +23,6 @@ public class SaveZone : MonoBehaviour
         _playerController = FindObjectOfType<PlayerController>();
         foreach (GameObject obj in ObjectsToReset)
         {
-            if (obj == null)
-            {
-                Debug.LogWarning("Object to reset is null. Please assign a GameObject to reset.");
-                continue;
-            }
             _savedObjectPositions.Add(obj.transform.position);
         }
     }
@@ -76,6 +71,12 @@ public class SaveZone : MonoBehaviour
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position - colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(colliderHalfSize.x, -colliderHalfSize.y) + colliderOffset);
+
+        Gizmos.color = Color.cyan;
+        foreach (GameObject obj in ObjectsToReset)
+        {
+            Gizmos.DrawLine(transform.position, obj.transform.position);
+        }
     }
 
 }
