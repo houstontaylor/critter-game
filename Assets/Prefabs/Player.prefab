@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 654127039849737474}
   - component: {fileID: 914652113278398089}
   - component: {fileID: 2987977290473804818}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MoveSpeed: 7
-  JumpPower: 13
+  JumpPower: 8
   footstepNoises:
   - {fileID: 8300000, guid: 3e1c13063697eb74ca3a4cd2fb2f6ab8, type: 3}
   - {fileID: 8300000, guid: cedb7c5a448f47a4a8922e3c56a26c12, type: 3}
