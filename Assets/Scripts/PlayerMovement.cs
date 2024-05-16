@@ -8,6 +8,7 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(BoxCollider2D))]
 [RequireComponent(typeof(AudioSource))]
+[RequireComponent(typeof(Animator))]
 public class PlayerMovement : MonoBehaviour
 {
 
@@ -24,10 +25,9 @@ public class PlayerMovement : MonoBehaviour
     private BoxCollider2D _boxCollider;  // Used for specific raycast information
     private AudioSource _audioSource;  // For playing sounds for footsteps
     private float _delaySinceLastFootstep;  // Recorded delay since last footstep SFX played
+    private Animator _animator;
 
     private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
-
-    Animator animator;
 
     private void Awake()
     {
@@ -35,7 +35,7 @@ public class PlayerMovement : MonoBehaviour
         _rb2D = GetComponent<Rigidbody2D>();
         _audioSource = GetComponent<AudioSource>();
         _boxCollider = GetComponent<BoxCollider2D>();
-        animator = GetComponent<Animator>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Update()
@@ -81,7 +81,7 @@ public class PlayerMovement : MonoBehaviour
                 }
             }
         }
-        animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
+        _animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
 
 
@@ -94,7 +94,7 @@ public class PlayerMovement : MonoBehaviour
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             _rb2D.velocity = new Vector2(_rb2D.velocity.x, JumpPower);
-            animator.Play("Critter_Jump");
+            _animator.Play("Critter_Jump");
         }
     }
 
