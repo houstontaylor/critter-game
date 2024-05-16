@@ -26,7 +26,6 @@ public class FadeZone : MonoBehaviour
     {
         float distFromPlayer = Vector2.Distance(_playerController.transform.position, transform.position);
         float fadeAlpha = ((_objectWidth - distFromPlayer) + HardZoneDistanceFromCenter) / _objectWidth;
-        Debug.Log(fadeAlpha);
         _globalFadeImage.color = new Color(0, 0, 0, Mathf.Clamp(fadeAlpha, 0, 1));
     }
 
