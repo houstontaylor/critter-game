@@ -6,7 +6,23 @@ public class SaveZone : MonoBehaviour
 {
 
     [Header("Area to Respawn the Player")]
-    public Transform RespawnPosition; 
+    public Transform RespawnPosition;
+
+    [Header("(Optional) Objects to Reset On Death")]
+    public GameObject[] ObjectsToReset;
+
+    private List<Vector3> _savedObjectPositions = new();
+
+    /// <summary>
+    /// Save all of the object positions to reset to.
+    /// </summary>
+    private void Awake()
+    {
+        foreach (GameObject obj in ObjectsToReset)
+        {
+            _savedObjectPositions.Add(obj.transform.position);
+        }
+    }
 
     /// <summary>
     /// When this save zone touches a player, saves the
@@ -18,6 +34,11 @@ public class SaveZone : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController player))
         {
             player.SavePosition(RespawnPosition.position);
+            // Reset all objects, if applicable
+            for (int i = 0; i <  ObjectsToReset.Length; i++)
+            {
+                ObjectsToReset[i].transform.position = _savedObjectPositions[i];
+            }
         }
     }
 
