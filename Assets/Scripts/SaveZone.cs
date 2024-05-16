@@ -13,14 +13,25 @@ public class SaveZone : MonoBehaviour
 
     private List<Vector3> _savedObjectPositions = new();
 
+    private PlayerController _playerController;
+
     /// <summary>
     /// Save all of the object positions to reset to.
     /// </summary>
     private void Awake()
     {
+        _playerController = FindObjectOfType<PlayerController>();
         foreach (GameObject obj in ObjectsToReset)
         {
             _savedObjectPositions.Add(obj.transform.position);
+        }
+    }
+
+    private void Start()
+    {
+        if (_playerController != null)
+        {
+            _playerController.OnDeath += ResetObjects;  // Reset objects when the player dies
         }
     }
 
@@ -34,11 +45,17 @@ public class SaveZone : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController player))
         {
             player.SavePosition(RespawnPosition.position);
-            // Reset all objects, if applicable
-            for (int i = 0; i <  ObjectsToReset.Length; i++)
-            {
-                ObjectsToReset[i].transform.position = _savedObjectPositions[i];
-            }
+        }
+    }
+
+    /// <summary>
+    /// Reset all objects in the scene.
+    /// </summary>
+    private void ResetObjects()
+    {
+        for (int i = 0; i < ObjectsToReset.Length; i++)
+        {
+            ObjectsToReset[i].transform.position = _savedObjectPositions[i];
         }
     }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,6 +8,8 @@ public class PlayerController : MonoBehaviour
 {
 
     public Vector3 LastRecordedSpawnLocation;  // Where the player will respawn on death
+
+    public Action OnDeath = null;
 
     private Rigidbody2D _rb2D;
 
@@ -27,6 +30,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
+        if (OnDeath != null)
+        {
+            OnDeath.Invoke();
+        }
     }
 
     /// <summary>
