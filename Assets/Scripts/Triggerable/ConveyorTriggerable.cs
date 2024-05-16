@@ -23,10 +23,11 @@ public class ConveyorTriggerable : Triggerable
     {
         if (isActive)
         {
-            // Move all passengers in the belt direction
-            foreach (GameObject passenger in passengers)
+            // Move the passengers
+            gameObject.TryGetComponent<Ridable>(out Ridable ridable);
+            if (ridable != null)
             {
-                passenger.transform.position += speed * Time.deltaTime * transform.right;
+                ridable.MovePassengers(speed * Time.deltaTime * transform.right);
             }
         }
     }
