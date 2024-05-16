@@ -71,6 +71,12 @@ public class SaveZone : MonoBehaviour
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position - colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(colliderHalfSize.x, -colliderHalfSize.y) + colliderOffset);
+
+        Gizmos.color = Color.cyan;
+        foreach (GameObject obj in ObjectsToReset)
+        {
+            Gizmos.DrawLine(transform.position, obj.transform.position);
+        }
     }
 
 }
