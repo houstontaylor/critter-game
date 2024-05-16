@@ -41,7 +41,7 @@ public class Laser : Triggerable
     {
         if (!IsLaserActive) { return; }
         // Make the player respawn if the laser raycasts hits them.
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Player"));
         if (hit && hit.transform.gameObject.TryGetComponent(out PlayerController playerController))
         {
             playerController.Respawn();
