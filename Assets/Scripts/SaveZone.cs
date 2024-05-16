@@ -11,7 +11,7 @@ public class SaveZone : MonoBehaviour
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
 
-    private List<Vector3> _savedObjectPositions = new();
+    private readonly List<Vector3> _savedObjectPositions = new();
 
     private PlayerController _playerController;
 

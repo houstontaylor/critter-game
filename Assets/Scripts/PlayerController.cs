@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-
+[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Animator))]
 public class PlayerController : MonoBehaviour
 {
 
@@ -12,10 +13,12 @@ public class PlayerController : MonoBehaviour
     public Action OnDeath = null;
 
     private Rigidbody2D _rb2D;
+    private Animator _animator;
 
     private void Awake()
     {
         _rb2D = GetComponent<Rigidbody2D>();
+        _animator = GetComponent<Animator>();
     }
 
     private void Start()
@@ -30,10 +33,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
-        if (OnDeath != null)
-        {
-            OnDeath.Invoke();
-        }
+        OnDeath?.Invoke();
     }
 
     /// <summary>
@@ -42,6 +42,11 @@ public class PlayerController : MonoBehaviour
     public void SavePosition(Vector3 position)
     {
         LastRecordedSpawnLocation = position;
+    }
+
+    public void PlayAnimation(string animName)
+    {
+        _animator.Play(animName);
     }
 
 }

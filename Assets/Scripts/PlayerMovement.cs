@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Info")]
     [Tooltip("How fast the player moves")] public float MoveSpeed;
     [Tooltip("How high the player jumps")] public float JumpPower;
-    
+    public bool CanMove = true;
+
     [Header("Footstep Audio Assignments")]
     public AudioClip[] footstepNoises;
     public float footstepVolume;
@@ -41,8 +42,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleXMovement();
-        HandleYMovement();
+        if (CanMove)
+        {
+            HandleXMovement();
+            HandleYMovement();
+        }
     }
 
     /// <summary>
