@@ -6,6 +6,10 @@ public class Pickupable : Interactable
 {
     public override void Interact()
     {
-        throw new System.NotImplementedException();
+        // Get a reference to the player
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+
+        // parent the pickupable to the player
+        transform.SetParent(player.transform);
     }
 }
