@@ -46,9 +46,9 @@ public class WireInteractable : Interactable
             // Turns the wires gray; this can be deleted later
             GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
             // Make all of the triggerables trigger
-            foreach (Triggerable triggerable in TriggerablesToTrigger)
+            if (TriggerablesToTrigger.Count > 0 && (!OnlyWorksOnce || !_wasActivated))
             {
-                if (triggerable != null && (!OnlyWorksOnce || !_wasActivated))
+                foreach (Triggerable triggerable in TriggerablesToTrigger)
                 {
                     _wasActivated = true;
                     triggerable.Interact();
