@@ -21,6 +21,6 @@ EditorBuildSettings:
     path: Assets/Scenes/_Ngoc.unity
     guid: 384c28be358c68540aea5306e83a2275
   - enabled: 1
-    path: Assets/Scenes/_Nils.unity
+    path: Assets/Scenes/_Nils_Levels/_Nils.unity
     guid: f570a70066c73404d95ac70b05c9fbeb
   m_configObjects: {}
