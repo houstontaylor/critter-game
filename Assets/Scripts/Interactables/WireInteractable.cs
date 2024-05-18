@@ -57,4 +57,16 @@ public class WireInteractable : Interactable
         }
     }
 
+    /// <summary>
+    /// Draw lines to everything this triggers.
+    /// </summary>
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.cyan;
+        foreach (Triggerable obj in TriggerablesToTrigger)
+        {
+            Gizmos.DrawLine(transform.position, obj.transform.position);
+        }
+    }
+
 }
