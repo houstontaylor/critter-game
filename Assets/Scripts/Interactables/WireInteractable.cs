@@ -27,15 +27,11 @@ public class WireInteractable : Interactable
 
 
     /// <summary>
-    /// If this wire interactable is within range of the player, 
-    /// and the player presses "E", then toggle the laser this
-    /// is connected to.
+    /// toggle the laser this is connected to.
     /// </summary>
-    private void Update()
+    public override void Interact()
     {
-        if (IsInteractable && Input.GetKeyDown(KeyCode.E))
-        {
-            if (OnlyWorksOnce)
+        if (OnlyWorksOnce)
             {
                 ShouldShowPopup = false;  //  Hide popup if this has been interacted with
                                           //  and it should only be interacted with ONCE
@@ -55,7 +51,6 @@ public class WireInteractable : Interactable
                 _wasActivated = true;
                 TriggerableToTrigger.Interact();
             }
-        }
     }
 
 }

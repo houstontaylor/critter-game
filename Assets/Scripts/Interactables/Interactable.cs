@@ -46,4 +46,17 @@ public abstract class Interactable : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// If this wire interactable is within range of the player, 
+    /// and the player presses "E", then call the Interact() method.
+    /// </summary>
+    private void Update()
+    {
+        if (IsInteractable && Input.GetKeyDown(KeyCode.E))
+        {
+            Interact();
+        }
+    }
+
+    public abstract void Interact();
 }
