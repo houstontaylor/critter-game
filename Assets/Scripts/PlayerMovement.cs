@@ -49,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
     /// Raycasts a box underneath the player. Returns True if touching an object with the "Ground"
     /// layer, else False.
     /// </summary>
-    private bool IsGrounded() => Physics2D.BoxCast(transform.position, _boxCollider.bounds.size, 0f, Vector2.down, 0.1f, LayerMask.GetMask("Ground"));
+    private bool IsGrounded() => Physics2D.BoxCast(transform.position, _boxCollider.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
 
     /// <summary>
     /// Handles the player's movement in the left-right direction.
