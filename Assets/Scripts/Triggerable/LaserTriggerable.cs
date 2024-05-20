@@ -94,6 +94,14 @@
 //    }
 
 //}
+
+
+
+
+
+
+
+
 //using System.Collections;
 //using System.Collections.Generic;
 //using UnityEngine;
@@ -205,7 +213,133 @@
 //    }
 //}
 
-using System.Collections;
+
+
+
+
+
+
+// using System.Collections;
+// using System.Collections.Generic;
+// using UnityEngine;
+
+// [RequireComponent(typeof(LineRenderer))]
+// public class Laser : Triggerable
+// {
+//     [Header("Particle System Assignment")]
+//     public ParticleSystem _laserParticles;
+
+//     [Header("Laser Properties")]
+//     [SerializeField] private bool _isLaserActive = true;
+//     public bool IsLaserActive
+//     {
+//         get => _isLaserActive;
+//         set
+//         {
+//             _isLaserActive = value;
+//             UpdateLaser();  // Update the laser visual when this value is modified
+//         }
+//     }
+
+//     private LineRenderer _lineRenderer;  // To edit the line renderer to shoot the laser
+
+//     [Header("Rotation Properties")]
+//     public float rotationSpeed = 30f; // Speed of rotation
+//     public float rotationAngle = 45f; // Max angle of rotation
+
+//     [Header("Movement Properties")]
+//     [SerializeField] private bool _isMoving = false; // Default is not moving
+//     public bool IsMoving
+//     {
+//         get => _isMoving;
+//         set => _isMoving = value;
+//     }
+
+//     private float initialRotationAngle;
+
+//     private void Awake()
+//     {
+//         _lineRenderer = GetComponent<LineRenderer>();
+//         UpdateLaser();
+
+//         // Store the initial rotation angle
+//         initialRotationAngle = transform.rotation.eulerAngles.z;
+//     }
+
+//     /// <summary>
+//     /// Toggles the laser from the on to off state, or vice versa.
+//     /// </summary>
+//     public override void Interact()
+//     {
+//         IsLaserActive = !IsLaserActive;
+//     }
+
+//     private void Update()
+//     {
+//         if (!IsLaserActive) { return; }
+
+//         if (IsMoving)
+//         {
+//             // Calculate rotation based on time and initial rotation angle
+//             float angle = Mathf.PingPong(Time.time * rotationSpeed, rotationAngle * 2) - rotationAngle;
+//             transform.rotation = Quaternion.Euler(0, 0, initialRotationAngle + angle);
+//         }
+
+//         UpdateLaser();  // This will be unperformant but it works!
+//     }
+
+//     /// <summary>
+//     /// Should be called any time this laser should be updated.
+//     /// Automatically called any time the laser's active boolean is toggled.
+//     /// (If you do something like move the laser, this should be called.)
+//     /// 
+//     /// If the laser is inactive, does not render the laser.
+//     /// </summary>
+//     public void UpdateLaser()
+//     {
+//         // If the laser is inactive, set the positions to an empty list
+//         if (!_isLaserActive)
+//         {
+//             _lineRenderer.positionCount = 0;
+//             _lineRenderer.SetPositions(new Vector3[] { });
+//             _laserParticles.Stop();
+//             return;
+//         }
+//         // Or else, try to render a hit, and shoot a laser off in that direction
+//         _lineRenderer.positionCount = 2;
+//         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground") | LayerMask.GetMask("Player"));
+//         if (hit)
+//         {
+//             _lineRenderer.SetPositions(new Vector3[] { transform.position, hit.point + (Vector2)transform.right * 0.1f });
+//             _laserParticles.transform.position = hit.point;
+//             _laserParticles.Play();
+
+//             // Make the player respawn if the laser raycasts hits them.
+//             if (hit.transform.gameObject.TryGetComponent(out PlayerController playerController))
+//             {
+//                 playerController.Respawn();
+//             }
+//         }
+//         else
+//         {
+//             // If no hit, set the end point far in the direction
+//             Vector3 endPoint = transform.position + transform.right * 99;
+//             _lineRenderer.SetPositions(new Vector3[] { transform.position, endPoint });
+//         }
+//     }
+
+//     /// <summary>
+//     /// Draw the direction of the laser.
+//     /// </summary>
+//     private void OnDrawGizmos()
+//     {
+//         if (IsLaserActive)
+//         {
+//             Gizmos.color = Color.yellow;
+//             Gizmos.DrawLine(transform.position, transform.position + transform.right * 5);
+//         }
+//     }
+// }
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -227,34 +361,31 @@ public class Laser : Triggerable
         }
     }
 
-    private LineRenderer _lineRenderer;  // To edit the line renderer to shoot the laser
-
-    [Header("Rotation Properties")]
-    public float rotationSpeed = 30f; // Speed of rotation
-    public float rotationAngle = 45f; // Max angle of rotation
+    private LineRenderer _lineRenderer;
+    private Vector3 _originalPosition;
+    private float _originalAngle;
+    private int _currentDeltaIndex = 0;
+    private float _movementProgress = 0;
 
     [Header("Movement Properties")]
-    [SerializeField] private bool _isMoving = false; // Default is not moving
-    public bool IsMoving
-    {
-        get => _isMoving;
-        set => _isMoving = value;
-    }
+    public List<Vector3> movementDeltas;
+    public float speed = 1.0f;
+    public bool isMoving = false;
 
-    private float initialRotationAngle;
+    [Header("Pivot Properties")]
+    public float pivotSpeed = 30.0f; // degrees per second
+    public bool isPivoting = false;
+    public float pivotAngle = 45.0f; // Angle to pivot in both directions
+    public bool pivotBetweenAngles = true; // If false, will rotate in a full circle
 
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
+        _originalPosition = transform.position;
+        _originalAngle = transform.rotation.eulerAngles.z;
         UpdateLaser();
-
-        // Store the initial rotation angle
-        initialRotationAngle = transform.rotation.eulerAngles.z;
     }
 
-    /// <summary>
-    /// Toggles the laser from the on to off state, or vice versa.
-    /// </summary>
     public override void Interact()
     {
         IsLaserActive = !IsLaserActive;
@@ -263,27 +394,45 @@ public class Laser : Triggerable
     private void Update()
     {
         if (!IsLaserActive) { return; }
-
-        if (IsMoving)
-        {
-            // Calculate rotation based on time and initial rotation angle
-            float angle = Mathf.PingPong(Time.time * rotationSpeed, rotationAngle * 2) - rotationAngle;
-            transform.rotation = Quaternion.Euler(0, 0, initialRotationAngle + angle);
-        }
-
-        UpdateLaser();  // This will be unperformant but it works!
+        if (isMoving) MoveLaser();
+        if (isPivoting) PivotLaser();
+        UpdateLaser();
     }
 
-    /// <summary>
-    /// Should be called any time this laser should be updated.
-    /// Automatically called any time the laser's active boolean is toggled.
-    /// (If you do something like move the laser, this should be called.)
-    /// 
-    /// If the laser is inactive, does not render the laser.
-    /// </summary>
+    private void MoveLaser()
+    {
+        if (movementDeltas.Count == 0) return;
+
+        // Calculate the progress based on speed and time
+        _movementProgress += speed * Time.deltaTime;
+        if (_movementProgress >= 1.0f)
+        {
+            _movementProgress = 0;
+            _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count;
+        }
+
+        // Interpolate between current and next position
+        Vector3 startPosition = _originalPosition + movementDeltas[_currentDeltaIndex];
+        Vector3 endPosition = _originalPosition + movementDeltas[(_currentDeltaIndex + 1) % movementDeltas.Count];
+        transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
+    }
+
+    private void PivotLaser()
+    {
+        if (pivotBetweenAngles)
+        {
+            // Calculate rotation based on time and initial rotation angle
+            float angle = Mathf.PingPong(Time.time * pivotSpeed, pivotAngle * 2) - pivotAngle;
+            transform.rotation = Quaternion.Euler(0, 0, _originalAngle + angle);
+        }
+        else
+        {
+            transform.Rotate(Vector3.forward, pivotSpeed * Time.deltaTime);
+        }
+    }
+
     public void UpdateLaser()
     {
-        // If the laser is inactive, set the positions to an empty list
         if (!_isLaserActive)
         {
             _lineRenderer.positionCount = 0;
@@ -291,7 +440,7 @@ public class Laser : Triggerable
             _laserParticles.Stop();
             return;
         }
-        // Or else, try to render a hit, and shoot a laser off in that direction
+
         _lineRenderer.positionCount = 2;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.right, 99, LayerMask.GetMask("Ground") | LayerMask.GetMask("Player"));
         if (hit)
@@ -300,7 +449,6 @@ public class Laser : Triggerable
             _laserParticles.transform.position = hit.point;
             _laserParticles.Play();
 
-            // Make the player respawn if the laser raycasts hits them.
             if (hit.transform.gameObject.TryGetComponent(out PlayerController playerController))
             {
                 playerController.Respawn();
@@ -308,15 +456,11 @@ public class Laser : Triggerable
         }
         else
         {
-            // If no hit, set the end point far in the direction
             Vector3 endPoint = transform.position + transform.right * 99;
             _lineRenderer.SetPositions(new Vector3[] { transform.position, endPoint });
         }
     }
 
-    /// <summary>
-    /// Draw the direction of the laser.
-    /// </summary>
     private void OnDrawGizmos()
     {
         if (IsLaserActive)
