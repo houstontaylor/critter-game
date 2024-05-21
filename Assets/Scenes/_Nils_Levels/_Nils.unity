@@ -481,6 +481,14 @@ PrefabInstance:
       propertyPath: TriggerableToTrigger
       value: 
       objectReference: {fileID: 671927306}
+    - target: {fileID: 2290839487310273934, guid: fa90dc5c3dea8dd4780e8f38fb9b067e, type: 3}
+      propertyPath: TriggerablesToTrigger.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2290839487310273934, guid: fa90dc5c3dea8dd4780e8f38fb9b067e, type: 3}
+      propertyPath: TriggerablesToTrigger.Array.data[0]
+      value: 
+      objectReference: {fileID: 671927306}
     - target: {fileID: 5634570811949352926, guid: fa90dc5c3dea8dd4780e8f38fb9b067e, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11.37
@@ -950,6 +958,11 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 168136319743252231, guid: 7f0c2c9f840cf4a26a3c3454428fa517, type: 3}
   m_PrefabInstance: {fileID: 344281301}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &358813034 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4876868983539142088, guid: 7af11914463ab4d86b9c3638121989df, type: 3}
+  m_PrefabInstance: {fileID: 1826565833}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &380563257
 PrefabInstance:
@@ -4203,7 +4216,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5367141872881965811, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61
+      value: 61.11
       objectReference: {fileID: 0}
     - target: {fileID: 5367141872881965811, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4245,6 +4258,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: SaveZone
       objectReference: {fileID: 0}
+    - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
+      propertyPath: ObjectsToReset.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
+      propertyPath: ObjectsToReset.Array.data[0]
+      value: 
+      objectReference: {fileID: 358813034}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
