@@ -38,10 +38,17 @@ public class PlayerController : MonoBehaviour
             // Check if there's something in interaction range
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
             // Filter for interactibles
-            colliders = Array.FindAll(colliders, collider => collider.TryGetComponent<Interactable>(out Interactable interactable) && interactable.IsInteractable && interactable.gameObject != holding);
+            Collider2D[] interactables = Array.FindAll(colliders, collider => 
+                collider.TryGetComponent<Interactable>(out Interactable interactable) && 
+                interactable.IsInteractable && 
+                interactable.gameObject != holding
+            );
             // Find nearest
-            Array.Sort(colliders, (a, b) => Vector2.Distance(a.transform.position, transform.position).CompareTo(Vector2.Distance(b.transform.position, transform.position)));
-            Interactable nearest = colliders.Length > 0 ? colliders[0].GetComponent<Interactable>() : null;
+            Array.Sort(interactables, (a, b) => 
+                Vector2.Distance(a.transform.position, transform.position)
+                .CompareTo(Vector2.Distance(b.transform.position, transform.position))
+            );
+            Interactable nearest = interactables.Length > 0 ? interactables[0].GetComponent<Interactable>() : null;
 
             if (nearest != null)
             {
