@@ -1175,11 +1175,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7036565312494325207, guid: 03c054168e03a6a4db4ff3d9d92a7353, type: 3}
       propertyPath: m_Size.x
-      value: 1.5
+      value: 1.11
       objectReference: {fileID: 0}
     - target: {fileID: 7036565312494325207, guid: 03c054168e03a6a4db4ff3d9d92a7353, type: 3}
       propertyPath: m_Size.y
-      value: 1.5
+      value: 1.06
       objectReference: {fileID: 0}
     - target: {fileID: 7036565312494325207, guid: 03c054168e03a6a4db4ff3d9d92a7353, type: 3}
       propertyPath: m_SpriteTilingProperty.pivot.x
