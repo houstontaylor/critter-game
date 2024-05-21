@@ -9,7 +9,7 @@ public class Pickupable : Interactable
         // Get a reference to the player
         GameObject player = GameObject.FindGameObjectWithTag("Player");
 
-        // parent the pickupable to the player
-        transform.SetParent(player.transform);
+        // Make the player pick up the object
+        player.GetComponent<PlayerController>().PickUp(gameObject);
     }
 }

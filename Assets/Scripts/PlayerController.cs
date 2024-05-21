@@ -13,6 +13,32 @@ public class PlayerController : MonoBehaviour
 
     private Rigidbody2D _rb2D;
 
+    public GameObject holding;
+
+    public void PickUp(GameObject item) {
+        if (holding != null) {
+            Drop();
+        }
+        holding = item;
+        item.transform.SetParent(transform);
+    }
+
+    public void Drop() {
+        if (holding == null) {
+            return;
+        }
+        holding.transform.SetParent(null);
+        holding = null;
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            Drop();
+        }
+    }
+
     private void Awake()
     {
         _rb2D = GetComponent<Rigidbody2D>();

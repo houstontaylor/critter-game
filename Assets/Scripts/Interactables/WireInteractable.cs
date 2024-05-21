@@ -31,6 +31,13 @@ public class WireInteractable : Interactable
     /// </summary>
     public override void Interact()
     {
+        // Ignore if player is holding something
+        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        if (player.GetComponent<PlayerController>().holding != null)
+        {
+            return;
+        }
+
         if (OnlyWorksOnce)
         {
             ShouldShowPopup = false;  //  Hide popup if this has been interacted with
