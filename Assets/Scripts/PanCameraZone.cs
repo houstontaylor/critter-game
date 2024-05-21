@@ -10,6 +10,7 @@ public struct PanInfo
     public Transform TransformToPanTo;
     public float DelayBefore;
     public float AnimationTime;
+    public float DelayAfter;
 }
 
 public class PanCameraZone : MonoBehaviour
@@ -19,7 +20,8 @@ public class PanCameraZone : MonoBehaviour
     public List<PanInfo> PanPositions = new();
     public bool OnlyWorksOnce = true;
 
-    private CinemachineVirtualCamera _mainCam;
+    private CinemachineVirtualCamera _mainVCam;
+    private Camera _mainCam;
     private PlayerMovement _playerMovement;
 
     private bool _alreadyTriggered = false;
@@ -31,7 +33,8 @@ public class PanCameraZone : MonoBehaviour
 
     private void Start()
     {
-        _mainCam = (CinemachineVirtualCamera)Camera.main.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+        _mainCam = Camera.main;
+        _mainVCam = (CinemachineVirtualCamera)_mainCam.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
     }
 
     /// <summary>
@@ -55,15 +58,40 @@ public class PanCameraZone : MonoBehaviour
     /// </summary>
     private IEnumerator PanCameraCoroutine()
     {
-        _playerMovement.CanPlayerMove = false; 
+        Vector3 startPos = _playerMovement.transform.position;
+        startPos.y += 1.2f;  // This is hard coded to match the Cinemachine's Y offset
+        startPos.z = -10;
+        _mainVCam.enabled = false;
+        _playerMovement.CanPlayerMove = false;
+        Vector3 currPos;
+        float currTime, timeToWait;
         for (int i = 0; i < PanPositions.Count; i++)
         {
             yield return new WaitForSeconds(PanPositions[i].DelayBefore);
-            _mainCam.Follow = PanPositions[i].TransformToPanTo;
-            yield return new WaitForSeconds(PanPositions[i].AnimationTime);
+            currTime = 0;
+            timeToWait = PanPositions[i].AnimationTime;
+            currPos = _mainCam.transform.position;
+            while (currTime < timeToWait)
+            {
+                Vector3 midArea = Vector3.Lerp(currPos, PanPositions[i].TransformToPanTo.position, Mathf.SmoothStep(0, 1, currTime / timeToWait));
+                midArea.z = -10;
+                _mainCam.transform.position = midArea;
+                currTime += Time.deltaTime;
+                yield return null;
+            }
+            yield return new WaitForSeconds(PanPositions[i].DelayAfter);
         }
-        _mainCam.Follow = _playerMovement.transform;
+        currTime = 0;
+        timeToWait = 1;
+        currPos = _mainCam.transform.position;
+        while (currTime < timeToWait)
+        {
+            _mainCam.transform.position = Vector3.Lerp(currPos, startPos, Mathf.SmoothStep(0, 1, currTime / timeToWait));
+            currTime += Time.deltaTime;
+            yield return null;
+        }
         _playerMovement.CanPlayerMove = true;
+        _mainVCam.enabled = true;
     }
 
     /// <summary>
