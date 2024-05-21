@@ -15,6 +15,19 @@ public class PlayerMovement : MonoBehaviour
     [Header("Player Info")]
     [Tooltip("How fast the player moves")] public float MoveSpeed;
     [Tooltip("How high the player jumps")] public float JumpPower;
+    public bool CanPlayerMove
+    {
+        get => _canPlayerMove;
+        set
+        {
+            _canPlayerMove = value;
+            if (!_canPlayerMove)
+            {
+                _rb2D.velocity = Vector2.zero;  // Freeze the player if set to false
+                _animator.SetFloat("xVelocity", 0);
+            }
+        }
+    }
     
     [Header("Footstep Audio Assignments")]
     public AudioClip[] footstepNoises;
@@ -29,6 +42,8 @@ public class PlayerMovement : MonoBehaviour
 
     private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
     private const float ALLOWED_JUMP_HOLD_TIME = 0.3f;  // TODO
+
+    private bool _canPlayerMove = true;
 
     private void Awake()
     {
@@ -58,6 +73,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void HandleXMovement()
     {
+        if (!_canPlayerMove) { return; }
         float horAxis = Input.GetAxis("Horizontal");
         if (horAxis != 0)
         {
@@ -92,6 +108,7 @@ public class PlayerMovement : MonoBehaviour
     /// </summary>
     private void HandleYMovement()
     {
+        if (!_canPlayerMove) { return; }
         if (IsGrounded() && Input.GetButtonDown("Jump"))
         {
             StartCoroutine(RenderJumpCoroutine());
