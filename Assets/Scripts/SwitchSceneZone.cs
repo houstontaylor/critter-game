@@ -8,6 +8,8 @@ public class SwitchSceneZone : MonoBehaviour
 
     [Header("Scene to Load when Touched")]
     public string TargetScene;
+    [Header("Should Start Next Scene Black?")]
+    public bool ShouldLoadNextSceneDarkened;
 
     /// <summary>
     /// When this switch scene zone is triggered, switch scene.
@@ -17,6 +19,7 @@ public class SwitchSceneZone : MonoBehaviour
     {
         if (collision.TryGetComponent(out PlayerController player))
         {
+            FadeZone.IsFadingFromOtherScene = ShouldLoadNextSceneDarkened;
             SceneManager.LoadScene(TargetScene);
         }
     }

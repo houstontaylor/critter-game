@@ -9,20 +9,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Game/_001Tutorial.unity
     guid: b18dc3459d3405b42a2468751349a760
   - enabled: 1
+    path: Assets/Scenes/Game/_002Factory.unity
+    guid: f1e1cd6cc52d5d744a57c1878b74adb4
+  - enabled: 1
     path: Assets/Scenes/Main.unity
     guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
-    path: Assets/Scenes/_Lucas.unity
-    guid: 5c58dc302e02bc64ab04cef50b384a8b
-  - enabled: 1
-    path: Assets/Scenes/_Houston.unity
-    guid: 2c4f4a82f90bbe645a02094ce316ae89
-  - enabled: 1
-    path: Assets/Scenes/_Lucien.unity
-    guid: 0aa0b87569b41def2b037a1f613bc75d
-  - enabled: 1
-    path: Assets/Scenes/_Ngoc.unity
-    guid: 384c28be358c68540aea5306e83a2275
   - enabled: 1
     path: Assets/Scenes/_Nils_Levels/_Nils.unity
     guid: f570a70066c73404d95ac70b05c9fbeb

@@ -7,6 +7,8 @@ using UnityEngine.UI;
 public class FadeZone : MonoBehaviour
 {
 
+    public static bool IsFadingFromOtherScene = false;  // Set to true when fade zone is passed
+
     [Header("Fade Properties")]
     public float HardZoneDistanceFromCenter = 0.4f;  // Distance from center player must
                                                      // pass through until full fade to black
@@ -20,6 +22,10 @@ public class FadeZone : MonoBehaviour
         _objectWidth = GetComponent<SpriteRenderer>().bounds.size.x / 2;
         _globalFadeImage = GameObject.FindGameObjectWithTag("GlobalFade").GetComponent<Image>();
         _playerController = FindObjectOfType<PlayerController>();
+        if (IsFadingFromOtherScene)
+        {
+            _globalFadeImage.color = Color.black;
+        }
     }
 
     private void OnTriggerStay2D(Collider2D collision)
