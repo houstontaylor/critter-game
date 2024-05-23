@@ -10,7 +10,7 @@ public class SaveZone : MonoBehaviour
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
 
-    private Dictionary<int, Transform> _savedTransforms = new();
+    private Dictionary<int, Vector3> _savedPositions = new();
     private Dictionary<int, bool> _savedLaserActives = new();
     private Dictionary<int, WireInteractable> _savedWires = new();
 
@@ -25,7 +25,7 @@ public class SaveZone : MonoBehaviour
         for (int i = 0; i < ObjectsToReset.Length; i++)
         {
             GameObject obj = ObjectsToReset[i];
-            _savedTransforms[i] = obj.transform;
+            _savedPositions[i] = obj.transform.position;
             if (obj.TryGetComponent(out Laser laser))
             {
                 _savedLaserActives[i] = laser.IsLaserActive;
@@ -65,7 +65,7 @@ public class SaveZone : MonoBehaviour
     {
         for (int i = 0; i < ObjectsToReset.Length; i++)
         {
-            ObjectsToReset[i].transform.position = _savedTransforms[i].position;
+            ObjectsToReset[i].transform.position = _savedPositions[i];
             if (ObjectsToReset[i].TryGetComponent(out Laser laser))
             {
                 laser.IsLaserActive = _savedLaserActives[i];
