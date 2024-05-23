@@ -56,8 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleXMovement();
-        HandleYMovement();
+        MovePlayerHorizontally();
+        MovePlayerVertically();
     }
 
     /// <summary>
@@ -70,23 +70,25 @@ public class PlayerMovement : MonoBehaviour
     /// Handles the player's movement in the left-right direction.
     /// Uses velocity-based movement, so you won't be able to add forces.
     /// (We may decide to change this later!)
+    /// 
+    /// If `horAxis` is set to 0, then take player movement normally.
+    /// If `horAxis` is set to non-0, then move the player by that left-right velocity.
     /// </summary>
-    private void HandleXMovement()
+    public void MovePlayerHorizontally(float horAxis = 0)
     {
-        if (!_canPlayerMove) { return; }
-        float horAxis = Input.GetAxis("Horizontal");
+        if (!_canPlayerMove && horAxis == 0) { return; }
+        if (horAxis == 0) horAxis = Input.GetAxis("Horizontal");
+        _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
+        if (horAxis < 0)
+        {
+            transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
+        }
+        else
+        {
+            transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
+        }
         if (horAxis != 0)
         {
-            _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
-            if (horAxis < 0)
-            {
-                transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
-            }
-            else
-            {
-                transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
-            }
-
             // Check if the footstepNoises array is not empty
             if (footstepNoises != null && footstepNoises.Length > 0)
             {
@@ -101,12 +103,11 @@ public class PlayerMovement : MonoBehaviour
         _animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
 
-
     /// <summary>
     /// Handles the player's jumping mechanic.
     /// Checks for the "Jump" button, which can be configured in Project Settings > Input Manager.
     /// </summary>
-    private void HandleYMovement()
+    private void MovePlayerVertically()
     {
         if (!_canPlayerMove) { return; }
         if (IsGrounded() && Input.GetButtonDown("Jump"))
