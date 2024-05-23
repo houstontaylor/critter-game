@@ -70,11 +70,14 @@ public class PlayerMovement : MonoBehaviour
     /// Handles the player's movement in the left-right direction.
     /// Uses velocity-based movement, so you won't be able to add forces.
     /// (We may decide to change this later!)
+    /// 
+    /// If `horAxis` is set to 0, then take player movement normally.
+    /// If `horAxis` is set to non-0, then move the player by that left-right velocity.
     /// </summary>
-    private void HandleXMovement()
+    public void HandleXMovement(float horAxis = 0)
     {
-        if (!_canPlayerMove) { return; }
-        float horAxis = Input.GetAxis("Horizontal");
+        if (!_canPlayerMove && horAxis == 0) { return; }
+        if (horAxis == 0) horAxis = Input.GetAxis("Horizontal");
         if (horAxis != 0)
         {
             _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
@@ -100,7 +103,6 @@ public class PlayerMovement : MonoBehaviour
         }
         _animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
-
 
     /// <summary>
     /// Handles the player's jumping mechanic.
