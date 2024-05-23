@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
         holding = null;
     }
 
+    public void ClearPickup() {
+        Destroy(holding);
+        holding = null;
+    }
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.E))
@@ -41,7 +46,7 @@ public class PlayerController : MonoBehaviour
             Collider2D[] interactables = Array.FindAll(colliders, collider => 
                 collider.TryGetComponent<Interactable>(out Interactable interactable) && 
                 interactable.IsInteractable && 
-                interactable.gameObject != holding
+                interactable.gameObject != holding // Ignore held items
             );
             // Find nearest
             Array.Sort(interactables, (a, b) => 

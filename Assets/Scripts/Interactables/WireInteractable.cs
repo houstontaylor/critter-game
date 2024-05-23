@@ -10,7 +10,8 @@ public class WireInteractable : Interactable
     public List<Triggerable> TriggerablesToTrigger;
     public bool OnlyWorksOnce = true;  // Set to true if this should only trigger ONCE
 
-    private bool _wasActivated = false;
+    private bool _chewed = false;
+    private bool _triggeredAnything = false;
 
     // player animation 
     private Animator _playerAnimator;
@@ -23,6 +24,11 @@ public class WireInteractable : Interactable
         {
             _playerAnimator = player.GetComponent<Animator>();
         }
+    }
+
+    public override bool ShouldShowPopup()
+    {
+        return !OnlyWorksOnce || !_chewed;
     }
 
 
@@ -40,8 +46,7 @@ public class WireInteractable : Interactable
 
         if (OnlyWorksOnce)
         {
-            ShouldShowPopup = false;  //  Hide popup if this has been interacted with
-                                      //  and it should only be interacted with ONCE
+            _chewed = true;
             PopupObject.SetActive(false);
 
             // plays chewing animation
@@ -53,11 +58,11 @@ public class WireInteractable : Interactable
             // Turns the wires gray; this can be deleted later
             GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
             // Make all of the triggerables trigger
-            if (TriggerablesToTrigger.Count > 0 && (!OnlyWorksOnce || !_wasActivated))
+            if (TriggerablesToTrigger.Count > 0 && (!OnlyWorksOnce || !_triggeredAnything))
             {
                 foreach (Triggerable triggerable in TriggerablesToTrigger)
                 {
-                    _wasActivated = true;
+                    _triggeredAnything = true;
                     triggerable.Interact();
                 }
             }
