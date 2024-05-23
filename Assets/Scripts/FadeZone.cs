@@ -37,6 +37,7 @@ public class FadeZone : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        if (_globalFadeImage == null) return;
         _globalFadeImage.color = Color.clear;
     }
 
