@@ -11,9 +11,9 @@ public class WireInteractable : Interactable
     public bool OnlyWorksOnce = true;  // Set to true if this should only trigger ONCE
 
     private bool _chewed = false;
-    private bool _triggeredAnything = false;
 
-    // player animation 
+    private PlayerController _playerController;
+    private PlayerMovement _playerMovement;
     private Animator _playerAnimator;
 
     void Start()
@@ -22,6 +22,8 @@ public class WireInteractable : Interactable
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
+            _playerController = player.GetComponent<PlayerController>();
+            _playerMovement = player.GetComponent<PlayerMovement>();
             _playerAnimator = player.GetComponent<Animator>();
         }
     }
@@ -37,36 +39,34 @@ public class WireInteractable : Interactable
     /// </summary>
     public override void Interact()
     {
-        // Ignore if player is holding something
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player.GetComponent<PlayerController>().holding != null)
+        if (_playerController.holding != null) return;  // Ignore if player is holding something
+        if (OnlyWorksOnce && _chewed) return;  // Ignore if should only work once and was activated
+        if (OnlyWorksOnce) PopupObject.SetActive(false);
+       
+        _chewed = true;
+        PopupObject.SetActive(false);
+
+        StartCoroutine(TemporarilyDisablePlayerMovementCoroutine());
+        _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
+            
+        // Turns the wires gray; this can be deleted later
+        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+
+        // Make all of the triggerables trigger
+        if (TriggerablesToTrigger.Count > 0)
         {
-            return;
-        }
-
-        if (OnlyWorksOnce)
-        {
-            _chewed = true;
-            PopupObject.SetActive(false);
-
-            // plays chewing animation
-            if (_playerAnimator != null)
+            foreach (Triggerable triggerable in TriggerablesToTrigger)
             {
-                _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
-            }
-
-            // Turns the wires gray; this can be deleted later
-            GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
-            // Make all of the triggerables trigger
-            if (TriggerablesToTrigger.Count > 0 && (!OnlyWorksOnce || !_triggeredAnything))
-            {
-                foreach (Triggerable triggerable in TriggerablesToTrigger)
-                {
-                    _triggeredAnything = true;
-                    triggerable.Interact();
-                }
+                triggerable.Interact();
             }
         }
+    }
+
+    private IEnumerator TemporarilyDisablePlayerMovementCoroutine()
+    {
+        _playerMovement.CanPlayerMove = false;
+        yield return new WaitForSeconds(1);
+        _playerMovement.CanPlayerMove = true;
     }
 
     /// <summary>
