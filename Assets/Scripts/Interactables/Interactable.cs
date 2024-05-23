@@ -35,7 +35,7 @@ public abstract class Interactable : MonoBehaviour
     /// <summary>
     /// If we stop colliding with the player, hide the popup.
     /// </summary>
-    public void OnTriggerExit2D(Collider2D collision)
+    private void OnTriggerExit2D(Collider2D collision)
     {
         IsInteractable = false;
         if (PopupObject != null && collision.gameObject.CompareTag("Player"))
