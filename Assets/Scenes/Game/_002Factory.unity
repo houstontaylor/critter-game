@@ -135,6 +135,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7253572451249265640, guid: 21acd3a3a40a3d64b83e156f52b8d73a, type: 3}
+      propertyPath: m_SortingOrder
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8671361008321507839, guid: 21acd3a3a40a3d64b83e156f52b8d73a, type: 3}
       propertyPath: m_LocalPosition.x
       value: -27.3
@@ -900,6 +904,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1255938766}
   - component: {fileID: 1255938767}
+  - component: {fileID: 1255938768}
   m_Layer: 0
   m_Name: miniAI
   m_TagString: Untagged
@@ -916,8 +921,8 @@ Transform:
   m_GameObject: {fileID: 1255938765}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 3.1099854, y: -3.34, z: 0}
-  m_LocalScale: {x: 0.7, y: 0.7, z: 1}
+  m_LocalPosition: {x: 6.51, y: -2.92, z: 0}
+  m_LocalScale: {x: 0.22435856, y: 0.22435856, z: 0.32051224}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1973952835}
@@ -964,7 +969,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8d3606dd7bf12044d9b8f078f2048cc1, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b16c26e699ac7084ea2f4e8591334fb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -975,6 +980,27 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!95 &1255938768
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1255938765}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 4f51a99c91c709647b8f8283a68f24e3, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1001 &1322652774
 PrefabInstance:
   m_ObjectHideFlags: 0
