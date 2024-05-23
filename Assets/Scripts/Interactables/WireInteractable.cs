@@ -16,6 +16,8 @@ public class WireInteractable : Interactable
     private PlayerMovement _playerMovement;
     private Animator _playerAnimator;
 
+    public override bool ShouldShowPopup() => !OnlyWorksOnce || !_chewed;
+
     void Start()
     {
         // Find the player by tag and get the Animator component
@@ -27,12 +29,6 @@ public class WireInteractable : Interactable
             _playerAnimator = player.GetComponent<Animator>();
         }
     }
-
-    public override bool ShouldShowPopup()
-    {
-        return !OnlyWorksOnce || !_chewed;
-    }
-
 
     /// <summary>
     /// toggle the laser this is connected to.
