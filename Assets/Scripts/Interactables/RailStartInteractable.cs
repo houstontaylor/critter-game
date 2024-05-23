@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class BrokenNicoInteractable : Interactable
+public class PipeStartInteractable : Interactable
 {
     private PlayerController _playerController;
     private void Start() {
@@ -11,6 +11,7 @@ public class BrokenNicoInteractable : Interactable
         }
         _playerController = player.GetComponent<PlayerController>();
     }
+
     public override void Interact()
     {
         // Get what the player is holding
@@ -19,22 +20,17 @@ public class BrokenNicoInteractable : Interactable
             return;
         }
 
-        // Check if the player is holding a battery
-        if (holding.name != "Battery") {
+        // Check if the player is holding Nico
+        if (holding.name != "Nico") {
             return;
         }
 
-        // Consumes the battery
-        _playerController.ClearPickup();
-
-        // Shift Nico into its next state
-        Pickupable pickupable = gameObject.AddComponent<Pickupable>();
-        pickupable.PopupObject = PopupObject; // Needed to set up the script properly
-        Destroy(this); // removes this script
+        // TODO: Move Nico onto the rail
+        _playerController.Drop();
     }
 
     public override bool ShouldShowPopup()
     {
-        return _playerController.holding != null && _playerController.holding.name == "Battery";
+        return _playerController.holding != null && _playerController.holding.name == "Nico";
     }
 }
