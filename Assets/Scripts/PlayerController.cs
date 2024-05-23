@@ -8,12 +8,22 @@ public class PlayerController : MonoBehaviour
 {
 
     public Vector3 LastRecordedSpawnLocation;  // Where the player will respawn on death
-
     public Action OnDeath = null;
+
+    [Header("Object Currently Holding")]
+    public GameObject holding;
 
     private Rigidbody2D _rb2D;
 
-    public GameObject holding;
+    private void Awake()
+    {
+        _rb2D = GetComponent<Rigidbody2D>();
+    }
+
+    private void Start()
+    {
+        LastRecordedSpawnLocation = transform.position;  // Spawn location is where the player starts, initially
+    }
 
     public void PickUp(GameObject item) {
         if (holding != null) {
@@ -40,38 +50,39 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.E))
         {
-            // Check if there's something in interaction range
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
-            // Filter for interactibles
-            Collider2D[] interactables = Array.FindAll(colliders, collider => 
-                collider.TryGetComponent<Interactable>(out Interactable interactable) && 
-                interactable.IsInteractable && 
-                interactable.gameObject != holding // Ignore held items
-            );
-            // Find nearest
-            Array.Sort(interactables, (a, b) => 
-                Vector2.Distance(a.transform.position, transform.position)
-                .CompareTo(Vector2.Distance(b.transform.position, transform.position))
-            );
-            Interactable nearest = interactables.Length > 0 ? interactables[0].GetComponent<Interactable>() : null;
-
-            if (nearest != null)
-            {
-                nearest.Interact();
-            } else {
-                Drop();
-            }
+            HandlePotentialInteractions();
         }
     }
 
-    private void Awake()
+    /// <summary>
+    /// Check for an interactable in the range. If one is present,
+    /// render logic to potentially interact with it.
+    /// </summary>
+    private void HandlePotentialInteractions()
     {
-        _rb2D = GetComponent<Rigidbody2D>();
-    }
+        // Check if there's something in interaction range
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, 2f);
+        // Filter for interactibles
+        Collider2D[] interactables = Array.FindAll(colliders, collider =>
+            collider.TryGetComponent<Interactable>(out Interactable interactable) &&
+            interactable.IsInteractable &&
+            interactable.gameObject != holding // Ignore held items
+        );
+        // Find nearest
+        Array.Sort(interactables, (a, b) =>
+            Vector2.Distance(a.transform.position, transform.position)
+            .CompareTo(Vector2.Distance(b.transform.position, transform.position))
+        );
+        Interactable nearest = interactables.Length > 0 ? interactables[0].GetComponent<Interactable>() : null;
 
-    private void Start()
-    {
-        LastRecordedSpawnLocation = transform.position;  // Spawn location is where the player starts, initially
+        if (nearest != null)
+        {
+            nearest.Interact();
+        }
+        else
+        {
+            Drop();
+        }
     }
 
     /// <summary>
@@ -81,10 +92,7 @@ public class PlayerController : MonoBehaviour
     {
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
-        if (OnDeath != null)
-        {
-            OnDeath.Invoke();
-        }
+        OnDeath?.Invoke();
     }
 
     /// <summary>
