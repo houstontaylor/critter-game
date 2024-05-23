@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class PipeStartInteractable : Interactable
+public class RailStartInteractable : Interactable
 {
     private PlayerController _playerController;
     private void Start() {
