@@ -56,8 +56,8 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        HandleXMovement();
-        HandleYMovement();
+        MovePlayerHorizontally();
+        MovePlayerVertically();
     }
 
     /// <summary>
@@ -74,7 +74,7 @@ public class PlayerMovement : MonoBehaviour
     /// If `horAxis` is set to 0, then take player movement normally.
     /// If `horAxis` is set to non-0, then move the player by that left-right velocity.
     /// </summary>
-    public void HandleXMovement(float horAxis = 0)
+    public void MovePlayerHorizontally(float horAxis = 0)
     {
         if (!_canPlayerMove && horAxis == 0) { return; }
         if (horAxis == 0) horAxis = Input.GetAxis("Horizontal");
@@ -108,7 +108,7 @@ public class PlayerMovement : MonoBehaviour
     /// Handles the player's jumping mechanic.
     /// Checks for the "Jump" button, which can be configured in Project Settings > Input Manager.
     /// </summary>
-    private void HandleYMovement()
+    private void MovePlayerVertically()
     {
         if (!_canPlayerMove) { return; }
         if (IsGrounded() && Input.GetButtonDown("Jump"))
