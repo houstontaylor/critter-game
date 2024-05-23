@@ -8,8 +8,6 @@ public abstract class Interactable : MonoBehaviour
 
     [Header("(Optional) Popup Assignment")]
     public GameObject PopupObject;
-
-    [HideInInspector] public bool ShouldShowPopup = true;
     [HideInInspector] public bool IsInteractable = false;  //  Can be checked by other scripts
                                                            //  to see if this is interactable
 
@@ -26,7 +24,7 @@ public abstract class Interactable : MonoBehaviour
     /// </summary>
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (!ShouldShowPopup) { return;  }
+        if (!ShouldShowPopup()) { return;  }
         IsInteractable = true;
         if (PopupObject != null && collision.gameObject.CompareTag("Player"))
         {
@@ -44,6 +42,9 @@ public abstract class Interactable : MonoBehaviour
         {
             PopupObject.SetActive(false);
         }
+    }
+    public virtual bool ShouldShowPopup() {
+        return true;
     }
 
     public abstract void Interact();
