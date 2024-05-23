@@ -26,7 +26,7 @@ public class KillZone : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Vector3 colliderOffset = GetComponent<BoxCollider2D>().offset;
-        Vector3 colliderHalfSize = GetComponent<BoxCollider2D>().size / 2;
+        Vector3 colliderHalfSize = GetComponent<BoxCollider2D>().size * transform.localScale / 2;
         Gizmos.DrawLine(transform.position - colliderHalfSize + colliderOffset, transform.position - new Vector3(colliderHalfSize.x, -colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position - colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
