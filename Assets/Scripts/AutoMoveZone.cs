@@ -25,10 +25,10 @@ public class AutoMoveZone : MonoBehaviour
     private IEnumerator MovePlayerToPositionCoroutine(PlayerMovement pMovement)
     {
         pMovement.CanPlayerMove = false;
-        Vector3 destPosition = pMovement.transform.position + new Vector3(horDist, 0);
-        while (Vector3.Distance(pMovement.transform.position, destPosition) > 0.5f)
+        float destX = pMovement.transform.position.x + horDist;
+        while (Mathf.Abs(pMovement.transform.position.x - destX) > 0.1f)
         {
-            pMovement.MovePlayerHorizontally(1);
+            pMovement.MovePlayerHorizontally((destX > pMovement.transform.position.x) ? 1 : -1);
             yield return null;
         }
         pMovement.CanPlayerMove = true;

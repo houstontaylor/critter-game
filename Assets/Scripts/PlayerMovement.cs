@@ -78,18 +78,17 @@ public class PlayerMovement : MonoBehaviour
     {
         if (!_canPlayerMove && horAxis == 0) { return; }
         if (horAxis == 0) horAxis = Input.GetAxis("Horizontal");
+        _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
+        if (horAxis < 0)
+        {
+            transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
+        }
+        else
+        {
+            transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
+        }
         if (horAxis != 0)
         {
-            _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
-            if (horAxis < 0)
-            {
-                transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
-            }
-            else
-            {
-                transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
-            }
-
             // Check if the footstepNoises array is not empty
             if (footstepNoises != null && footstepNoises.Length > 0)
             {
