@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +10,9 @@ public class SaveZone : MonoBehaviour
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
 
-    private List<Vector3> _savedObjectPositions = new();
+    private Dictionary<int, Transform> _savedTransforms = new();
+    private Dictionary<int, bool> _savedLaserActives = new();
+    private Dictionary<int, WireInteractable> _savedWires = new();
 
     private PlayerController _playerController;
 
@@ -21,9 +22,18 @@ public class SaveZone : MonoBehaviour
     private void Awake()
     {
         _playerController = FindObjectOfType<PlayerController>();
-        foreach (GameObject obj in ObjectsToReset)
+        for (int i = 0; i < ObjectsToReset.Length; i++)
         {
-            _savedObjectPositions.Add(obj.transform.position);
+            GameObject obj = ObjectsToReset[i];
+            _savedTransforms[i] = obj.transform;
+            if (obj.TryGetComponent(out Laser laser))
+            {
+                _savedLaserActives[i] = laser.IsLaserActive;
+            }
+            if (obj.TryGetComponent(out WireInteractable wire))
+            {
+                _savedWires[i] = wire;
+            }
         }
     }
 
@@ -55,7 +65,15 @@ public class SaveZone : MonoBehaviour
     {
         for (int i = 0; i < ObjectsToReset.Length; i++)
         {
-            ObjectsToReset[i].transform.position = _savedObjectPositions[i];
+            ObjectsToReset[i].transform.position = _savedTransforms[i].position;
+            if (ObjectsToReset[i].TryGetComponent(out Laser laser))
+            {
+                laser.IsLaserActive = _savedLaserActives[i];
+            }
+            if (ObjectsToReset[i].TryGetComponent(out WireInteractable wire))
+            {
+                _savedWires[i].Reset();
+            }
         }
     }
 
@@ -72,7 +90,6 @@ public class SaveZone : MonoBehaviour
         Gizmos.DrawLine(transform.position - colliderHalfSize + colliderOffset, transform.position - new Vector3(-colliderHalfSize.x, colliderHalfSize.y) + colliderOffset);
         Gizmos.DrawLine(transform.position + colliderHalfSize + colliderOffset, transform.position - new Vector3(colliderHalfSize.x, -colliderHalfSize.y) + colliderOffset);
 
-        Gizmos.color = Color.cyan;
         foreach (GameObject obj in ObjectsToReset)
         {
             Gizmos.DrawLine(transform.position, obj.transform.position);
