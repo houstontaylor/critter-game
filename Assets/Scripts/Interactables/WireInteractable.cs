@@ -10,13 +10,13 @@ public class WireInteractable : Interactable
     public List<Triggerable> TriggerablesToTrigger;
     public bool OnlyWorksOnce = true;  // Set to true if this should only trigger ONCE
 
-    private bool _chewed = false;
+    public bool chewed = false;
 
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
     private Animator _playerAnimator;
 
-    public override bool ShouldShowPopup() => !OnlyWorksOnce || !_chewed;
+    public override bool ShouldShowPopup() => !OnlyWorksOnce || !chewed;
 
     void Start()
     {
@@ -36,15 +36,15 @@ public class WireInteractable : Interactable
     public override void Interact()
     {
         if (_playerController.holding != null) return;  // Ignore if player is holding something
-        if (OnlyWorksOnce && _chewed) return;  // Ignore if should only work once and was activated
+        if (OnlyWorksOnce && chewed) return;  // Ignore if should only work once and was activated
         if (OnlyWorksOnce) PopupObject.SetActive(false);
-       
-        _chewed = true;
+
+        chewed = true;
         PopupObject.SetActive(false);
 
         StartCoroutine(TemporarilyDisablePlayerMovementCoroutine());
         _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
-            
+
         // Turns the wires gray; this can be deleted later
         GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
 
@@ -56,6 +56,11 @@ public class WireInteractable : Interactable
                 triggerable.Interact();
             }
         }
+    }
+
+    public void Reset() {
+        chewed = false;
+        GetComponent<SpriteRenderer>().color = Color.white;
     }
 
     private IEnumerator TemporarilyDisablePlayerMovementCoroutine()
