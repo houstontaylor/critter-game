@@ -57,23 +57,45 @@ public class Laser : Triggerable
         UpdateLaser();
     }
 
+    //private void MoveLaser()
+    //{
+    //    if (movementDeltas.Count == 0) return;
+
+    //    // Calculate the progress based on speed and time
+    //    _movementProgress += speed * Time.deltaTime;
+    //    if (_movementProgress >= 1.0f)
+    //    {
+    //        _movementProgress = 0;
+    //        _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count;
+    //    }
+
+    //    // Interpolate between current and next position
+    //    Vector3 startPosition = _originalPosition + movementDeltas[_currentDeltaIndex];
+    //    Vector3 endPosition = _originalPosition + movementDeltas[(_currentDeltaIndex + 1) % movementDeltas.Count];
+    //    transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
+    //}
+
     private void MoveLaser()
     {
-        if (movementDeltas.Count == 0) return;
+        if (movementDeltas.Count < 2) return; // Ensure there are at least two points to move between
 
-        // Calculate the progress based on speed and time
-        _movementProgress += speed * Time.deltaTime;
-        if (_movementProgress >= 1.0f)
-        {
-            _movementProgress = 0;
-            _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count;
-        }
-
-        // Interpolate between current and next position
+        // Calculate the progress based on constant speed and time
         Vector3 startPosition = _originalPosition + movementDeltas[_currentDeltaIndex];
         Vector3 endPosition = _originalPosition + movementDeltas[(_currentDeltaIndex + 1) % movementDeltas.Count];
+        float segmentDistance = Vector3.Distance(startPosition, endPosition);
+        float segmentSpeed = speed / segmentDistance; // Adjust speed based on the segment distance
+
+        _movementProgress += segmentSpeed * Time.deltaTime;
+        if (_movementProgress >= 1.0f)
+        {
+            _movementProgress = 0; // Reset progress for the next segment
+            _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count; // Move to the next segment
+        }
+
+        // Interpolate between current and next position using the adjusted speed
         transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
     }
+
 
     private void PivotLaser()
     {
