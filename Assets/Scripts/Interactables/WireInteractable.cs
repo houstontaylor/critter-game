@@ -5,12 +5,13 @@ using UnityEngine;
 
 public class WireInteractable : Interactable
 {
-
     [Header("Trigger Assignment")]
     public List<Triggerable> TriggerablesToTrigger;
     public bool OnlyWorksOnce = true;  // Set to true if this should only trigger ONCE
 
     public bool chewed = false;
+
+    public Sprite wiresChewedSprite;
 
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
@@ -46,7 +47,7 @@ public class WireInteractable : Interactable
         _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
 
         // Turns the wires gray; this can be deleted later
-        GetComponent<SpriteRenderer>().color = new Color(0.6f, 0.6f, 0.6f);
+        ChangeSprite();
 
         // Make all of the triggerables trigger
         if (TriggerablesToTrigger.Count > 0)
@@ -57,6 +58,32 @@ public class WireInteractable : Interactable
             }
         }
     }
+
+    void ChangeSprite()
+    {
+        // Find the child object named "Wire Image"
+        Transform wireImageTransform = transform.Find("Wire Image");
+        if (wireImageTransform != null)
+        {
+            // Get the SpriteRenderer component from the child object
+            SpriteRenderer wireImageRenderer = wireImageTransform.GetComponent<SpriteRenderer>();
+            if (wireImageRenderer != null)
+            {
+                // Change the sprite to "wires_chewed"
+                wireImageRenderer.sprite = wiresChewedSprite;
+                wireImageRenderer.color = new Color(0.6f, 0.6f, 0.6f);
+            }
+            else
+            {
+                Debug.LogError("SpriteRenderer not found on child object 'Wire Image'");
+            }
+        }
+        else
+        {
+            Debug.LogError("Child object 'Wire Image' not found");
+        }
+    }
+
 
     public void Reset() {
         chewed = false;
