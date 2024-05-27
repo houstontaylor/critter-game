@@ -91,9 +91,12 @@ public class Laser : Triggerable
             _movementProgress = 0; // Reset progress for the next segment
             _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count; // Move to the next segment
         }
+        else  // Else, or else we'll set movement to 0 and then instant TP the laser
+        {
 
-        // Interpolate between current and next position using the adjusted speed
-        transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
+            // Interpolate between current and next position using the adjusted speed
+            transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
+        }
     }
 
 
