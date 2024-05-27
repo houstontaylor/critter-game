@@ -41,7 +41,7 @@ public class PlayerMovement : MonoBehaviour
     private Animator _animator;
 
     private const float TIME_BETWEEN_FOOTSTEP_NOISES = 0.16f;  // Const for delay between footstep sounds
-    private const float ALLOWED_JUMP_HOLD_TIME = 0.3f;  // TODO
+    private const float ALLOWED_JUMP_HOLD_TIME = 0.3f;
 
     private bool _canPlayerMove = true;
 
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
     /// Raycasts a box underneath the player. Returns True if touching an object with the "Ground"
     /// layer, else False.
     /// </summary>
-    private bool IsGrounded() => Physics2D.BoxCast(transform.position, _boxCollider.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
+    public bool IsGrounded() => Physics2D.BoxCast(transform.position, _boxCollider.bounds.size, 0f, Vector2.down, 0.02f, LayerMask.GetMask("Ground"));
 
     /// <summary>
     /// Handles the player's movement in the left-right direction.

@@ -36,7 +36,7 @@ public class WireInteractable : Interactable
     /// </summary>
     public override void Interact()
     {
-        if (_playerController.holding != null) return;  // Ignore if player is holding something
+        if (_playerMovement.IsGrounded() && _playerController.holding != null) return;  // Ignore if player is holding something
         if (OnlyWorksOnce && chewed) return;  // Ignore if should only work once and was activated
         if (OnlyWorksOnce) PopupObject.SetActive(false);
 

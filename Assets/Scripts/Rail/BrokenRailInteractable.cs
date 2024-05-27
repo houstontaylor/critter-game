@@ -1,9 +1,8 @@
 using UnityEngine;
 
-
-public class RailStartInteractable : Interactable
+public class BrokenRailInteractible : Interactable
 {
-    public Rail rail;
+    public RailControlPoint rail;
     private PlayerController _playerController;
     private void Start() {
         // Get a reference to the player controller
@@ -14,26 +13,28 @@ public class RailStartInteractable : Interactable
         _playerController = player.GetComponent<PlayerController>();
     }
 
-    public override void Interact()
-    {
+    // If the player is holding a rail segment, consume it and advance the rail
+    public override void Interact() {
         // Get what the player is holding
         GameObject holding = _playerController.holding;
         if (holding == null) {
             return;
         }
 
-        // Check if the player is holding Nico
-        if (holding.name != "Nico") {
+        // Check if the player is holding a rail segment
+        if (holding.name != "RailSegment") {
             return;
         }
 
-        // Move Nico onto the rail
-        rail.Mount(holding);
-        Destroy(holding.GetComponent<Pickupable>());
+        // Consumes the item
+        _playerController.ClearPickup();
+
+        // Let the rail know it's repaired
+        rail.Continue();
     }
 
     public override bool ShouldShowPopup()
     {
-        return _playerController.holding != null && _playerController.holding.name == "Nico";
+        return _playerController.holding != null && _playerController.holding.name == "RailSegment";
     }
 }

@@ -3,6 +3,7 @@ using UnityEngine;
 public class BrokenNicoInteractable : Interactable
 {
     private PlayerController _playerController;
+    public Sprite freedNicoSprite;
     private void Start() {
         // Get a reference to the player controller
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -31,6 +32,8 @@ public class BrokenNicoInteractable : Interactable
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
         // FIXME: Have to leave and reenter after giving battery in order to pick up
+        // Swap out the sprite
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = freedNicoSprite;
         Destroy(this); // removes this script
     }
 
