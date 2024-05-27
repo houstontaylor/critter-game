@@ -1287,6 +1287,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: KillZone
       objectReference: {fileID: 0}
+    - target: {fileID: 850352388521760106, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3609340098036012827, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
       propertyPath: m_LocalScale.x
       value: 95.47
