@@ -9,4 +9,8 @@ public class RailControlPoint : MonoBehaviour
         Gizmos.color = isStop ? Color.red : Color.green;
         Gizmos.DrawWireSphere(transform.position, 0.25f);
     }
+
+    public void Continue() {
+        isStop = false;
+    }
 }
