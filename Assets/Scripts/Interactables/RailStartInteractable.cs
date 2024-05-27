@@ -1,7 +1,9 @@
 using UnityEngine;
 
+
 public class RailStartInteractable : Interactable
 {
+    public Rail rail;
     private PlayerController _playerController;
     private void Start() {
         // Get a reference to the player controller
@@ -25,8 +27,8 @@ public class RailStartInteractable : Interactable
             return;
         }
 
-        // TODO: Move Nico onto the rail
-        _playerController.Drop();
+        // Move Nico onto the rail
+        rail.Mount(holding);
     }
 
     public override bool ShouldShowPopup()

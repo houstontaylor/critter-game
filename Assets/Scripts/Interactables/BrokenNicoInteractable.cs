@@ -30,6 +30,7 @@ public class BrokenNicoInteractable : Interactable
         // Shift Nico into its next state
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
+        // FIXME: Have to leave and reenter after giving battery in order to pick up
         Destroy(this); // removes this script
     }
 
