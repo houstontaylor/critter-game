@@ -178,6 +178,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopupObject: {fileID: 3751398591835928754}
   IsInteractable: 0
+  freedNicoSprite: {fileID: 21300000, guid: 5e3102c2a7785da4eb16761809d2523f, type: 3}
 --- !u!1 &3751398591835928754
 GameObject:
   m_ObjectHideFlags: 0
