@@ -6,6 +6,7 @@ public class Rail : MonoBehaviour
     public Rail nextRail;
     int currentControlPoint = 0;
     bool isMoving = true;
+    public float speed = 1.0f;
     GameObject rider;
     void Start() {
         controlPoints = transform.Find("ControlPoints").GetComponentsInChildren<RailControlPoint>();
@@ -39,7 +40,7 @@ public class Rail : MonoBehaviour
         // Then move nico towards the control point
         if (isMoving) {
             Vector3 direction = (controlPoints[currentControlPoint].transform.position - rider.transform.position).normalized;
-            rider.transform.position += 1.0f * Time.deltaTime * direction;
+            rider.transform.position += speed * Time.deltaTime * direction;
         }
     }
 }

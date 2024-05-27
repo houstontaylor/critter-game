@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class MovingPlatform : Triggerable
 {
-    public float speed = 1.0f;
+    public float speed;
     List<Vector3> controlPoints = new List<Vector3>();
     int currentControlPoint = 0;
 
