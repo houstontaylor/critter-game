@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 5387114500800119058}
   m_Layer: 3
   m_Name: RailControlPoint
-  m_TagString: Untagged
+  m_TagString: RailCP
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
