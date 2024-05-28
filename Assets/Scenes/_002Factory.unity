@@ -469,7 +469,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: ObjectsToReset.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: ObjectsToReset.Array.data[0]
@@ -1508,6 +1508,10 @@ Transform:
   - {fileID: 1312570574}
   - {fileID: 329654367}
   - {fileID: 1388271723}
+  - {fileID: 947575757}
+  - {fileID: 252115121}
+  - {fileID: 1624882811}
+  - {fileID: 1323000870}
   m_Father: {fileID: 1923236639}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &715563482
@@ -3283,6 +3287,7 @@ Transform:
   - {fileID: 1328362606}
   - {fileID: 1640021371}
   - {fileID: 938942833}
+  - {fileID: 2055447224}
   m_Father: {fileID: 672226939}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1322652774
