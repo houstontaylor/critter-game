@@ -50,7 +50,7 @@ public class WireInteractable : Interactable
         StartCoroutine(TemporarilyDisablePlayerMovementCoroutine());
         _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
 
-        audioSource.PlayOneShot(chewSound chewVolume);
+        audioSource.PlayOneShot(chewSound, chewVolume);
 
         // Turns the wires gray; this can be deleted later
         ChangeSprite();
