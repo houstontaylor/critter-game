@@ -58,7 +58,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: af944973255ea2648b9d62d3174f493c, type: 3}
   footstepVolume: 0.04
   jumpSound: {fileID: 8300000, guid: fa16d966568fde94d886986763bf19f0, type: 3}
-  jumpVolume: 0.5
+  jumpVolume: 0.15
 --- !u!114 &8653284403938709605
 MonoBehaviour:
   m_ObjectHideFlags: 0
