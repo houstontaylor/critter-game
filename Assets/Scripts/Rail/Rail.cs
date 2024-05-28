@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Rail : MonoBehaviour
 {
-    public RailControlPoint[] controlPoints;
+    private RailControlPoint[] controlPoints;
     public Rail nextRail;
     int currentControlPoint = 0;
     public float speed = 1.0f;
