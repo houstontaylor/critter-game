@@ -80,27 +80,27 @@ public class PlayerMovement : MonoBehaviour
         if (!_canPlayerMove && horAxis == 0) { return; }
         if (horAxis == 0) horAxis = Input.GetAxis("Horizontal");
         _rb2D.velocity = new Vector2(horAxis * MoveSpeed, _rb2D.velocity.y);
-        if (horAxis < 0)
-        {
-            transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
-        }
-        else
-        {
-            transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
-        }
+
+        // Check direction and apply scale accordingly, but only if horAxis is not zero
         if (horAxis != 0)
         {
-            // Check if the footstepNoises array is not empty
-            if (footstepNoises != null && footstepNoises.Length > 0)
+            if (horAxis < 0)
             {
-                // If the player is not in the air, play some footstep noises
-                if (IsGrounded() && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES)
-                {
-                    _audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
-                    _delaySinceLastFootstep = Time.time;
-                }
+                transform.localScale = new Vector2(-_initialScale.x, _initialScale.y);
+            }
+            else if (horAxis > 0)
+            {
+                transform.localScale = new Vector2(_initialScale.x, _initialScale.y);
+            }
+
+            // Play footstep sounds if the player is grounded and moving
+            if (IsGrounded() && Time.time - _delaySinceLastFootstep > TIME_BETWEEN_FOOTSTEP_NOISES)
+            {
+                _audioSource.PlayOneShot(footstepNoises[Random.Range(0, footstepNoises.Length)], footstepVolume);
+                _delaySinceLastFootstep = Time.time;
             }
         }
+
         _animator.SetFloat("xVelocity", Mathf.Abs(_rb2D.velocity.x));
     }
 
