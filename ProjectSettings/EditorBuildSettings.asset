@@ -23,4 +23,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/_006End.unity
     guid: d16fe1f35bbee7047a38b6023edc41a0
+  - enabled: 1
+    path: Assets/Scenes/_Lucas.unity
+    guid: 5c58dc302e02bc64ab04cef50b384a8b
   m_configObjects: {}

@@ -59,6 +59,12 @@ public class PanCameraZone : MonoBehaviour
     /// </summary>
     private IEnumerator PanCameraCoroutine()
     {
+        // For some reason, if the _mainVCam is null, then try assigning it again
+        // (Removing this causes an issue when a new scene is loaded)
+        if (_mainVCam == null)
+        {
+            _mainVCam = (CinemachineVirtualCamera)_mainCam.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+        }
         Vector3 startPos = _playerMovement.transform.position;
         startPos.y += 1.2f;  // This is hard coded to match the Cinemachine's Y offset
         startPos.z = -10;
