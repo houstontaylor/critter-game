@@ -5562,7 +5562,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3931001927504890397, guid: c37f8c8d4f449e14f970ba41ef90bf28, type: 3}
       propertyPath: horDist
-      value: 12
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6693568260801649692, guid: c37f8c8d4f449e14f970ba41ef90bf28, type: 3}
       propertyPath: m_LocalPosition.x

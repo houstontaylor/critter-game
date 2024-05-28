@@ -35,6 +35,7 @@ public class PanCameraZone : MonoBehaviour
     {
         _mainCam = Camera.main;
         _mainVCam = (CinemachineVirtualCamera)_mainCam.GetComponent<CinemachineBrain>().ActiveVirtualCamera;
+        // FIXME: _mainVCam is null when scene is loaded from another scene
     }
 
     /// <summary>
