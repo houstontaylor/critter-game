@@ -4,6 +4,9 @@ public class BrokenNicoInteractable : Interactable
 {
     private PlayerController _playerController;
     public Sprite freedNicoSprite;
+    public AudioClip powerUpSound;
+    public float powerUpVolume;
+    private AudioSource audioSource;
     private void Start() {
         // Get a reference to the player controller
         GameObject player = GameObject.FindGameObjectWithTag("Player");
@@ -11,6 +14,7 @@ public class BrokenNicoInteractable : Interactable
             return;
         }
         _playerController = player.GetComponent<PlayerController>();
+        audioSource = GetComponent<AudioSource>();
     }
     public override void Interact()
     {
@@ -27,6 +31,9 @@ public class BrokenNicoInteractable : Interactable
 
         // Consumes the battery
         _playerController.ClearPickup();
+
+        // Play turning on sound
+        audioSource.PlayOneShot(powerUpSound, powerUpVolume);
 
         // Shift Nico into its next state
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
