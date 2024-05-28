@@ -44,6 +44,7 @@ public abstract class Interactable : MonoBehaviour
         }
     }
     public virtual bool ShouldShowPopup() {
+        // FIXME: multiple pickupables near each other show multiple popups
         return true;
     }
 

@@ -1,36 +1,21 @@
 using UnityEngine;
 
-public class BrokenNicoInteractable : Interactable
+public class BrokenNicoInteractable : ItemTaker
 {
-    private PlayerController _playerController;
     public Sprite freedNicoSprite;
     public AudioClip powerUpSound;
     public float powerUpVolume;
     private AudioSource audioSource;
-    private void Start() {
-        // Get a reference to the player controller
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) {
-            return;
-        }
-        _playerController = player.GetComponent<PlayerController>();
+    public override string ItemName { get { return "Battery"; } }
+    private new void Start() {
+        base.Start();
         audioSource = GetComponent<AudioSource>();
     }
     public override void Interact()
     {
-        // Get what the player is holding
-        GameObject holding = _playerController.holding;
-        if (holding == null) {
+        if (!TakeItem()) {
             return;
         }
-
-        // Check if the player is holding a battery
-        if (holding.name != "Battery") {
-            return;
-        }
-
-        // Consumes the battery
-        _playerController.ClearPickup();
 
         // Play turning on sound
         audioSource.PlayOneShot(powerUpSound, powerUpVolume);
@@ -42,10 +27,5 @@ public class BrokenNicoInteractable : Interactable
         // Swap out the sprite
         transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = freedNicoSprite;
         Destroy(this); // removes this script
-    }
-
-    public override bool ShouldShowPopup()
-    {
-        return _playerController.holding != null && _playerController.holding.name == "Battery";
     }
 }

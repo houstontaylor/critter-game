@@ -132,6 +132,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1882979318}
     m_Modifications:
     - target: {fileID: 1095031375232102594, guid: 679bdc1a1e6e58146917c2a4a1d4e84b, type: 3}
+      propertyPath: NextRail
+      value: 
+      objectReference: {fileID: 1949653626}
+    - target: {fileID: 1095031375232102594, guid: 679bdc1a1e6e58146917c2a4a1d4e84b, type: 3}
       propertyPath: nextRail
       value: 
       objectReference: {fileID: 1949653626}

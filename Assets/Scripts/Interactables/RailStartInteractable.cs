@@ -1,34 +1,22 @@
 using UnityEngine;
 
 
-public class RailStartInteractable : Interactable
+public class RailStartInteractable : ItemTaker
 {
     public Rail rail;
-    private PlayerController _playerController;
-    private void Start() {
-        // Get a reference to the player controller
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
-        if (player == null) {
-            return;
-        }
-        _playerController = player.GetComponent<PlayerController>();
-    }
+    public override string ItemName { get { return "Nico"; } }
 
     public override void Interact()
     {
-        // Get what the player is holding
-        GameObject holding = _playerController.holding;
-        if (holding == null) {
-            return;
-        }
-
-        // Check if the player is holding Nico
-        if (holding.name != "Nico") {
+        if (!TakeItem(false)) {
             return;
         }
 
         // Move Nico onto the rail
+        GameObject holding = _playerController.holding;
         rail.Mount(holding);
+        Nico nico = holding.AddComponent<Nico>();
+        nico.PopupObject = holding.GetComponent<Pickupable>().PopupObject;
         Destroy(holding.GetComponent<Pickupable>());
     }
 
