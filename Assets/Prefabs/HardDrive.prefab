@@ -96,7 +96,7 @@ GameObject:
   - component: {fileID: 5258603824456926545}
   - component: {fileID: 2500517189936401828}
   m_Layer: 0
-  m_Name: Hard Drive
+  m_Name: HardDrive
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

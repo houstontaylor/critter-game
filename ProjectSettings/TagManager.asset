@@ -6,7 +6,7 @@ TagManager:
   tags:
   - GlobalFade
   - StopPoint
-  - RailCP
+  - Rail
   layers:
   - Default
   - TransparentFX
