@@ -12,6 +12,7 @@ public class WireInteractable : Interactable
     public bool chewed = false;
 
     public Sprite wiresChewedSprite;
+    public Sprite wiresNormal;
 
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
@@ -79,21 +80,25 @@ public class WireInteractable : Interactable
                 wireImageRenderer.sprite = wiresChewedSprite;
                 wireImageRenderer.color = new Color(0.6f, 0.6f, 0.6f);
             }
-            else
-            {
-                Debug.LogError("SpriteRenderer not found on child object 'Wire Image'");
-            }
-        }
-        else
-        {
-            Debug.LogError("Child object 'Wire Image' not found");
         }
     }
 
 
     public void Reset() {
         chewed = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        // Find the child object named "Wire Image"
+        Transform wireImageTransform = transform.Find("Wire Image");
+        if (wireImageTransform != null)
+        {
+            // Get the SpriteRenderer component from the child object
+            SpriteRenderer wireImageRenderer = wireImageTransform.GetComponent<SpriteRenderer>();
+            if (wireImageRenderer != null)
+            {
+                // Change the sprite to "wires_working"
+                wireImageRenderer.sprite = wiresNormal;
+                wireImageRenderer.color = Color.white;
+            }
+        }
     }
 
     private IEnumerator TemporarilyDisablePlayerMovementCoroutine()
