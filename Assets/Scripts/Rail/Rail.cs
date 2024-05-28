@@ -1,33 +1,43 @@
+using System.Linq;
 using UnityEngine;
 
+
+[RequireComponent(typeof(LineRenderer))]
 public class Rail : MonoBehaviour
 {
    
-    public Rail nextRail;
-    int currentControlPoint = 0;
-    public float speed = 1.0f;
-    GameObject rider;
+    public Rail NextRail;
+    public float RailMoveSpeed = 1.0f;
 
+    private int currentControlPoint = 0;
+    private GameObject _rider;
     private RailControlPoint[] _controlPoints;
+    private LineRenderer _lineRenderer;  // This sprite's line renderer to show rails
+
+    private void Awake()
+    {
+        _lineRenderer = GetComponent<LineRenderer>();
+    }
 
     void Start() {
         _controlPoints = transform.Find("ControlPoints").GetComponentsInChildren<RailControlPoint>();
+        RenderRails();
     }
 
     public void Mount(GameObject newRider) {
         newRider.transform.position = _controlPoints[0].transform.position;
         newRider.transform.SetParent(null);
-        rider = newRider;
+        _rider = newRider;
     }
 
-    // Interpolate rider towards next control point
+    // Interpolate _rider towards next control point
     void FixedUpdate() {
-        if (rider == null) {
+        if (_rider == null) {
             return;
         }
 
         // First, check if we're at the control point, and increment if we are
-        if (Vector3.Distance(rider.transform.position, _controlPoints[currentControlPoint].transform.position) < 0.1f) {
+        if (Vector3.Distance(_rider.transform.position, _controlPoints[currentControlPoint].transform.position) < 0.1f) {
             if (_controlPoints[currentControlPoint].isStop) {
                 // Reaches a stop, stop moving until told to move again
                 return;
@@ -35,16 +45,26 @@ public class Rail : MonoBehaviour
             currentControlPoint++;
             if (currentControlPoint >= _controlPoints.Length) {
                 // Reached the end of the rail; dismount
-                if (nextRail != null) {
-                    nextRail.Mount(rider);
+                if (NextRail != null) {
+                    NextRail.Mount(_rider);
                 }
-                rider = null;
+                _rider = null;
                 return;
             }
         }
 
         // Then move nico towards the control point
-        Vector3 direction = (_controlPoints[currentControlPoint].transform.position - rider.transform.position).normalized;
-        rider.transform.position += speed * Time.deltaTime * direction;
+        Vector3 direction = (_controlPoints[currentControlPoint].transform.position - _rider.transform.position).normalized;
+        _rider.transform.position += RailMoveSpeed * Time.deltaTime * direction;
     }
+
+    private void RenderRails()
+    {
+        _lineRenderer.positionCount = _controlPoints.Length;
+        for (int i = 0; i < _controlPoints.Length; i++)
+        {
+            _lineRenderer.SetPosition(i, _controlPoints[i].transform.position);
+        }
+    }
+
 }
