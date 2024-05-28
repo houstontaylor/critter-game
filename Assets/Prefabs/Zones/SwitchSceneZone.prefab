@@ -91,7 +91,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76d28e05cd374dd44b40a9b902e85689, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TargetScene: _Lucien
+  TargetScene: _003Factory
+  ShouldLoadNextSceneDarkened: 0
 --- !u!212 &1849141257477797079
 SpriteRenderer:
   m_ObjectHideFlags: 0
