@@ -5,7 +5,7 @@ using UnityEngine;
 public class MovingPlatform : Triggerable
 {
     public float speed;
-    List<Vector3> controlPoints = new List<Vector3>();
+    List<Vector3> _controlPoints = new List<Vector3>();
     int currentControlPoint = 0;
 
     public bool isMoving = true;
@@ -15,17 +15,17 @@ public class MovingPlatform : Triggerable
         Transform controlsPointsParent = transform.Find("ControlPoints");
         foreach (Transform child in controlsPointsParent.transform)
         {
-            controlPoints.Add(child.position);
+            _controlPoints.Add(child.position);
         }
     }
 
     void FixedUpdate()
     {
         // If we're at the control point, move to the next one
-        if (Vector3.Distance(transform.position, controlPoints[currentControlPoint]) < 0.1f)
+        if (Vector3.Distance(transform.position, _controlPoints[currentControlPoint]) < 0.1f)
         {
             currentControlPoint++;
-            if (currentControlPoint >= controlPoints.Count)
+            if (currentControlPoint >= _controlPoints.Count)
             {
                 currentControlPoint = 0;
             }
@@ -33,7 +33,7 @@ public class MovingPlatform : Triggerable
         // Move towards the control point
         if (isMoving)
         {
-            Vector3 direction = (controlPoints[currentControlPoint] - transform.position).normalized;
+            Vector3 direction = (_controlPoints[currentControlPoint] - transform.position).normalized;
             transform.position += speed * Time.deltaTime * direction;
 
             // Move the passengers
