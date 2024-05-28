@@ -24,6 +24,7 @@ public class ConveyorTriggerable : Triggerable
         if (isActive)
         {
             // Move the passengers
+            // FIXME: Stacking when a passenger is on multiple conveyors
             gameObject.TryGetComponent<Ridable>(out Ridable ridable);
             if (ridable != null)
             {
