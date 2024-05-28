@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6548061100572448480}
   - component: {fileID: 6573156226088984133}
   m_Layer: 3
-  m_Name: Ground
+  m_Name: Factory Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 21300000, guid: 2ae891413e511eb4b8c2fcb14eb3e348, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 991adde5306823b409aec42daa5a0571, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -121,7 +121,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1.28, y: 1.28}
+    oldSize: {x: 1.69, y: 0.895}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
