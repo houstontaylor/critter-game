@@ -32,7 +32,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Footstep Audio Assignments")]
     public AudioClip[] footstepNoises;
     public float footstepVolume;
-
+    public AudioClip jumpSound;
+    public float jumpVolume;
     private Vector2 _initialScale;  // Used to flip the player left-right according to scale
     private Rigidbody2D _rb2D;  // Used to adjust the player's velocity
     private BoxCollider2D _boxCollider;  // Used for specific raycast information
@@ -114,6 +115,7 @@ public class PlayerMovement : MonoBehaviour
         {
             StartCoroutine(RenderJumpCoroutine());
             _animator.Play("Critter_Jump");
+            _audioSource.PlayOneShot(jumpSound, jumpVolume);
         }
     }
 

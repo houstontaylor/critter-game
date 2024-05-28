@@ -9,6 +9,9 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 LastRecordedSpawnLocation;  // Where the player will respawn on death
     public Action OnDeath = null;
+    public AudioClip deathSound;
+    public float deathVolume;
+    private AudioSource audioSource;
 
     [Header("Object Currently Holding")]
     public GameObject holding;
@@ -23,6 +26,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         LastRecordedSpawnLocation = transform.position;  // Spawn location is where the player starts, initially
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void PickUp(GameObject item) {
@@ -93,6 +97,7 @@ public class PlayerController : MonoBehaviour
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
         OnDeath?.Invoke();
+        audioSource.PlayOneShot(deathSound, deathVolume); // play death sound
     }
 
     /// <summary>

@@ -12,10 +12,14 @@ public class WireInteractable : Interactable
     public bool chewed = false;
 
     public Sprite wiresChewedSprite;
+    public Sprite wiresNormal;
 
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
     private Animator _playerAnimator;
+    public AudioClip chewSound;
+    public float chewVolume;
+    private AudioSource audioSource;
 
     public override bool ShouldShowPopup() => !OnlyWorksOnce || !chewed;
 
@@ -29,6 +33,7 @@ public class WireInteractable : Interactable
             _playerMovement = player.GetComponent<PlayerMovement>();
             _playerAnimator = player.GetComponent<Animator>();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -45,6 +50,8 @@ public class WireInteractable : Interactable
 
         StartCoroutine(TemporarilyDisablePlayerMovementCoroutine());
         _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
+
+        audioSource.PlayOneShot(chewSound, chewVolume);
 
         // Turns the wires gray; this can be deleted later
         ChangeSprite();
@@ -73,21 +80,25 @@ public class WireInteractable : Interactable
                 wireImageRenderer.sprite = wiresChewedSprite;
                 wireImageRenderer.color = new Color(0.6f, 0.6f, 0.6f);
             }
-            else
-            {
-                Debug.LogError("SpriteRenderer not found on child object 'Wire Image'");
-            }
-        }
-        else
-        {
-            Debug.LogError("Child object 'Wire Image' not found");
         }
     }
 
 
     public void Reset() {
         chewed = false;
-        GetComponent<SpriteRenderer>().color = Color.white;
+        // Find the child object named "Wire Image"
+        Transform wireImageTransform = transform.Find("Wire Image");
+        if (wireImageTransform != null)
+        {
+            // Get the SpriteRenderer component from the child object
+            SpriteRenderer wireImageRenderer = wireImageTransform.GetComponent<SpriteRenderer>();
+            if (wireImageRenderer != null)
+            {
+                // Change the sprite to "wires_working"
+                wireImageRenderer.sprite = wiresNormal;
+                wireImageRenderer.color = Color.white;
+            }
+        }
     }
 
     private IEnumerator TemporarilyDisablePlayerMovementCoroutine()
