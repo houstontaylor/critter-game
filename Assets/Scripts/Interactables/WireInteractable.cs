@@ -16,6 +16,9 @@ public class WireInteractable : Interactable
     private PlayerController _playerController;
     private PlayerMovement _playerMovement;
     private Animator _playerAnimator;
+    public AudioClip chewSound;
+    public float chewVolume;
+    private AudioSource audioSource;
 
     public override bool ShouldShowPopup() => !OnlyWorksOnce || !chewed;
 
@@ -29,6 +32,7 @@ public class WireInteractable : Interactable
             _playerMovement = player.GetComponent<PlayerMovement>();
             _playerAnimator = player.GetComponent<Animator>();
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     /// <summary>
@@ -45,6 +49,8 @@ public class WireInteractable : Interactable
 
         StartCoroutine(TemporarilyDisablePlayerMovementCoroutine());
         _playerAnimator.Play("Critter_Chew");  // Play the chewing animation on the player
+
+        audioSource.PlayOneShot(chewSound chewVolume);
 
         // Turns the wires gray; this can be deleted later
         ChangeSprite();
