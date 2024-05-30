@@ -20,12 +20,16 @@ public class BrokenNicoInteractable : ItemTaker
         // Play turning on sound
         audioSource.PlayOneShot(powerUpSound, powerUpVolume);
 
+        // stop animation and swap out the sprite
+        // FIXME: Animation not stopping
+        GetComponent<Animator>().StopPlayback();
+        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = freedNicoSprite;
+
         // Shift Nico into its next state
+        // FIXME: Need to walk out and back in to pick up after giving battery
+        Destroy(this); // removes this script
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
-        // FIXME: Have to leave and reenter after giving battery in order to pick up
-        // Swap out the sprite
-        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = freedNicoSprite;
-        Destroy(this); // removes this script
+
     }
 }

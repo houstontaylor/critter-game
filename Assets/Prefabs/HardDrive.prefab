@@ -94,7 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 67890422386162081}
   - component: {fileID: 5258603824456926545}
-  - component: {fileID: 2500517189936401828}
+  - component: {fileID: 2189206217655997177}
   m_Layer: 0
   m_Name: HardDrive
   m_TagString: Untagged
@@ -164,7 +164,7 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
---- !u!114 &2500517189936401828
+--- !u!114 &2189206217655997177
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2174511861227413774}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d00dab1366d45d29989ccfd122e201f3, type: 3}
+  m_Script: {fileID: 11500000, guid: 885367b7d2e564a23806752260aa0593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   PopupObject: {fileID: 6235361987080850877}
