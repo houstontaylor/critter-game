@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 93b3a25213056ca088803e6bbe1898a6, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db6a121baaf0144469fccc6a971293ed, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -334,12 +334,12 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  m_hasFontAssetChanged: 0
-  m_renderer: {fileID: 1104699326450124676}
-  m_maskType: 0
   _SortingLayer: 0
   _SortingLayerID: 0
   _SortingOrder: 0
+  m_hasFontAssetChanged: 0
+  m_renderer: {fileID: 1104699326450124676}
+  m_maskType: 0
 --- !u!1 &8390194338556693544
 GameObject:
   m_ObjectHideFlags: 0
@@ -434,3 +434,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopupObject: {fileID: 20194804621284620}
   IsInteractable: 0
+  _playerController: {fileID: 0}
+  rail: {fileID: 0}
