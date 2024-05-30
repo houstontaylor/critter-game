@@ -70,6 +70,10 @@ LineRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: 0fa4de2b05a75ac419f1ba0e02ed8d1b, type: 2}
+  - {fileID: 2100000, guid: 59f134a944034444ba48fa72ce690a0d, type: 2}
+  - {fileID: 2100000, guid: 2d11f0dd94310354f97393d0413a896a, type: 2}
+  - {fileID: 2100000, guid: 1fb1b203a4b89984285d067cc1ee526b, type: 2}
+  - {fileID: 2100000, guid: 432aefa441cd26a46b9fa0efc0467190, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -95,7 +99,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1
+    widthMultiplier: 1.9613873
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -145,7 +149,7 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 1
-    textureScale: {x: 1, y: -1}
+    textureScale: {x: 0.5, y: -1}
     shadowBias: 0.5
     generateLightingData: 0
   m_MaskInteraction: 0
