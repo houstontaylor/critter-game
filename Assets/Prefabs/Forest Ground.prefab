@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2648348696608678976}
   - component: {fileID: 4196781249250255946}
   - component: {fileID: 3165650557319090161}
+  - component: {fileID: 7702514172681631605}
   m_Layer: 3
   m_Name: Forest Ground
   m_TagString: Untagged
@@ -79,7 +80,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
-  m_Size: {x: 1, y: 0.86734325}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -117,16 +118,28 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.0016285479, y: -0.023732662}
+  m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
     oldSize: {x: 1.69, y: 0.895}
-    newSize: {x: 1, y: 0.86734325}
+    newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 2
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9985481, y: 0.83744144}
+  m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &7702514172681631605
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 230797408020494301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b949f4a1ccc1a284dafcbae7eb350854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

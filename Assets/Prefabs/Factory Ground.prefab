@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 2956964692205264775}
   - component: {fileID: 6548061100572448480}
   - component: {fileID: 6573156226088984133}
+  - component: {fileID: 7240938525656151283}
   m_Layer: 3
   m_Name: Factory Ground
   m_TagString: Untagged
@@ -130,3 +131,15 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.9985481, y: 0.83744144}
   m_EdgeRadius: 0
+--- !u!114 &7240938525656151283
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8810607738489621798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b949f4a1ccc1a284dafcbae7eb350854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
