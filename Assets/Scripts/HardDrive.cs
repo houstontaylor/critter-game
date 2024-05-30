@@ -6,4 +6,5 @@ public class HardDrive : Pickupable
 {
     public Cutscene cutscene;
     public RailControlPoint stop;
+    public DoorTriggerable door;
 }
