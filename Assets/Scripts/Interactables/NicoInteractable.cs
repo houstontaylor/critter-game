@@ -17,6 +17,12 @@ public class Nico : ItemTaker
             return;
         }
 
+        DoorTriggerable door = GetItem().GetComponent<HardDrive>().door;
+        if (door == null) {
+            Debug.LogError("Hard drive does not have a door set");
+            return;
+        }
+
         if (!TakeItem()) {
             return;
         }
@@ -25,6 +31,7 @@ public class Nico : ItemTaker
         cutscene.Play();
         // TODO: unpause
 
+        door.Interact();
         stop.Continue();
     }
 }

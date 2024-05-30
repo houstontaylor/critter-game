@@ -13,7 +13,10 @@ public class RailStartInteractable : ItemTaker
         }
 
         // Move Nico onto the rail
-        GameObject holding = _playerController.holding;
+        GameObject holding = GetItem();
+        if (holding == null) {
+            return;
+        }
         rail.Mount(holding);
         Nico nico = holding.AddComponent<Nico>();
         nico.PopupObject = holding.GetComponent<Pickupable>().PopupObject;
