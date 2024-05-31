@@ -21,9 +21,7 @@ public class BrokenNicoInteractable : ItemTaker
         audioSource.PlayOneShot(powerUpSound, powerUpVolume);
 
         // stop animation and swap out the sprite
-        // FIXME: Animation not stopping
-        GetComponent<Animator>().StopPlayback();
-        transform.Find("Sprite").GetComponent<SpriteRenderer>().sprite = freedNicoSprite;
+        GetComponent<Animator>().SetBool("Freed", true);
 
         // Shift Nico into its next state
         // FIXME: Need to walk out and back in to pick up after giving battery

@@ -180,6 +180,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PopupObject: {fileID: 3751398591835928754}
   IsInteractable: 0
+  _playerController: {fileID: 0}
   freedNicoSprite: {fileID: 21300000, guid: 5e3102c2a7785da4eb16761809d2523f, type: 3}
   powerUpSound: {fileID: 8300000, guid: 2c294e6f3872c4189972b999222a231c, type: 3}
   powerUpVolume: 0.5
@@ -550,9 +551,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 4015387072983282958}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0
