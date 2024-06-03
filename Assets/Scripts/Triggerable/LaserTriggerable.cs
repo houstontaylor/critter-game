@@ -36,11 +36,14 @@ public class Laser : Triggerable
     public float pivotAngle = 45.0f; // Angle to pivot in both directions
     public bool pivotBetweenAngles = true; // If false, will rotate in a full circle
 
+    private bool _initialLaserActive;
+
     private void Awake()
     {
         _lineRenderer = GetComponent<LineRenderer>();
         _originalPosition = transform.position;
         _originalAngle = transform.rotation.eulerAngles.z;
+        _initialLaserActive = _isLaserActive;
         UpdateLaser();
     }
 
@@ -56,24 +59,6 @@ public class Laser : Triggerable
         if (isPivoting) PivotLaser();
         UpdateLaser();
     }
-
-    //private void MoveLaser()
-    //{
-    //    if (movementDeltas.Count == 0) return;
-
-    //    // Calculate the progress based on speed and time
-    //    _movementProgress += speed * Time.deltaTime;
-    //    if (_movementProgress >= 1.0f)
-    //    {
-    //        _movementProgress = 0;
-    //        _currentDeltaIndex = (_currentDeltaIndex + 1) % movementDeltas.Count;
-    //    }
-
-    //    // Interpolate between current and next position
-    //    Vector3 startPosition = _originalPosition + movementDeltas[_currentDeltaIndex];
-    //    Vector3 endPosition = _originalPosition + movementDeltas[(_currentDeltaIndex + 1) % movementDeltas.Count];
-    //    transform.position = Vector3.Lerp(startPosition, endPosition, _movementProgress);
-    //}
 
     private void MoveLaser()
     {
@@ -142,6 +127,11 @@ public class Laser : Triggerable
             Vector3 endPoint = transform.position + transform.right * 99;
             _lineRenderer.SetPositions(new Vector3[] { transform.position, endPoint });
         }
+    }
+
+    public void Reset()
+    {
+        IsLaserActive = _initialLaserActive;
     }
 
     private void OnDrawGizmos()

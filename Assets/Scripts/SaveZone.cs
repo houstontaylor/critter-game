@@ -7,15 +7,13 @@ public class SaveZone : MonoBehaviour
     [Header("Area to Respawn the Player")]
     public Transform RespawnPosition;
     
-    [Header("Rail Control Point to Trigger")]
+    [Header("(Optional) Rail Control Point to Trigger")]
     public RailControlPoint railControlPoint;
 
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
 
     private Dictionary<int, Vector3> _savedPositions = new();
-    private Dictionary<int, bool> _savedLaserActives = new();
-    private Dictionary<int, WireInteractable> _savedWires = new();
 
     private PlayerController _playerController;
 
@@ -29,14 +27,6 @@ public class SaveZone : MonoBehaviour
         {
             GameObject obj = ObjectsToReset[i];
             _savedPositions[i] = obj.transform.position;
-            if (obj.TryGetComponent(out Laser laser))
-            {
-                _savedLaserActives[i] = laser.IsLaserActive;
-            }
-            if (obj.TryGetComponent(out WireInteractable wire))
-            {
-                _savedWires[i] = wire;
-            }
         }
     }
 
@@ -75,11 +65,15 @@ public class SaveZone : MonoBehaviour
             ObjectsToReset[i].transform.position = _savedPositions[i];
             if (ObjectsToReset[i].TryGetComponent(out Laser laser))
             {
-                laser.IsLaserActive = _savedLaserActives[i];
+                laser.Reset();
             }
             if (ObjectsToReset[i].TryGetComponent(out WireInteractable wire))
             {
-                _savedWires[i].Reset();
+                wire.Reset();
+            }
+            if (ObjectsToReset[i].TryGetComponent(out MovingPlatform movPlat))
+            {
+                movPlat.Reset();
             }
         }
     }
