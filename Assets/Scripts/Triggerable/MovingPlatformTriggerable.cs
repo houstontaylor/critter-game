@@ -9,6 +9,12 @@ public class MovingPlatform : Triggerable
     int currentControlPoint = 0;
 
     public bool isMoving = true;
+    private bool _initialState;
+
+    private void Awake()
+    {
+        _initialState = isMoving;
+    }
 
     void Start()
     {
@@ -43,6 +49,11 @@ public class MovingPlatform : Triggerable
                 ridable.MovePassengers(speed * Time.deltaTime * direction);
             }
         }
+    }
+
+    public void Reset()
+    {
+        isMoving = _initialState;
     }
 
     public override void Interact()
