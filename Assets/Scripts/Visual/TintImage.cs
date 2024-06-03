@@ -5,7 +5,8 @@ using System.Collections;
 public class TintImage : MonoBehaviour
 {
     public Color darkTint = Color.gray;
-    public float cycleDuration = 2f;
+    public float firstDuration = 2f;
+    public float secondDuration = 2f;
     public bool startDark = false;
     private Color normalColor;
     private SpriteRenderer spriteRenderer;
@@ -29,11 +30,11 @@ public class TintImage : MonoBehaviour
 
             // Set the color to startColor
             spriteRenderer.color = startColor;
-            yield return new WaitForSeconds(cycleDuration);
+            yield return new WaitForSeconds(firstDuration);
 
             // Set the color to endColor
             spriteRenderer.color = endColor;
-            yield return new WaitForSeconds(cycleDuration);
+            yield return new WaitForSeconds(secondDuration);
         }
     }
 }
