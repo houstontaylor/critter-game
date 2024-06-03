@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class BrokenNicoInteractable : ItemTaker
 {
-    public Sprite freedNicoSprite;
     public AudioClip powerUpSound;
     public float powerUpVolume;
     private AudioSource audioSource;

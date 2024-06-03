@@ -10,7 +10,7 @@ public class Rail : MonoBehaviour
     public float RailMoveSpeed = 1.0f;
 
     private int currentControlPoint = 0;
-    private GameObject _rider;
+    public GameObject _rider;
     private RailControlPoint[] _controlPoints;
     private LineRenderer _lineRenderer;  // This sprite's line renderer to show rails
 
@@ -22,6 +22,9 @@ public class Rail : MonoBehaviour
     void Start() {
         _controlPoints = transform.Find("ControlPoints").GetComponentsInChildren<RailControlPoint>();
         RenderRails();
+        if (_rider != null) {
+            Mount(_rider);
+        }
     }
 
     public void Mount(GameObject newRider) {
