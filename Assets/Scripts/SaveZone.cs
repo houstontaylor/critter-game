@@ -6,6 +6,9 @@ public class SaveZone : MonoBehaviour
 
     [Header("Area to Respawn the Player")]
     public Transform RespawnPosition;
+    
+    [Header("Rail Control Point to Trigger")]
+    public RailControlPoint railControlPoint;
 
     [Header("(Optional) Objects to Reset On Death")]
     public GameObject[] ObjectsToReset;
@@ -55,6 +58,10 @@ public class SaveZone : MonoBehaviour
         if (collision.TryGetComponent(out PlayerController player))
         {
             player.SavePosition(RespawnPosition.position);
+            if (railControlPoint != null)
+            {
+                railControlPoint.Continue();
+            }
         }
     }
 

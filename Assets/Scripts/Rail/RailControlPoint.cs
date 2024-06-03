@@ -17,7 +17,7 @@ public class RailControlPoint : MonoBehaviour
     public void Continue() {
         isStop = false;
     }
-    
+
     // Called when Nico reaches a control point. If the
     // point is a stop, this is only called after Nico continues past it.
     public void Trigger() {

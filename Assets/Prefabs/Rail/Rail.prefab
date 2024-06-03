@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   NextRail: {fileID: 0}
-  RailMoveSpeed: 1
+  RailMoveSpeed: 5
 --- !u!120 &4214130186525618486
 LineRenderer:
   serializedVersion: 2
@@ -99,7 +99,7 @@ LineRenderer:
   - {x: 0, y: 0, z: 1}
   m_Parameters:
     serializedVersion: 3
-    widthMultiplier: 1.9613873
+    widthMultiplier: 8
     widthCurve:
       serializedVersion: 2
       m_Curve:
