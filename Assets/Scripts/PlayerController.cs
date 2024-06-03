@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 
 public class PlayerController : MonoBehaviour
@@ -94,6 +95,12 @@ public class PlayerController : MonoBehaviour
     /// </summary>
     public void Respawn()
     {
+        // If you're holding anything, drop it
+        if (holding != null)
+        {
+            holding.transform.SetParent(null);
+        }
+        // Reset the location of the player
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
         OnDeath?.Invoke();
