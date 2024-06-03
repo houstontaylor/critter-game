@@ -5,6 +5,7 @@ public class BrokenNicoInteractable : ItemTaker
     public AudioClip powerUpSound;
     public float powerUpVolume;
     private AudioSource audioSource;
+
     public override string ItemName { get { return "Battery"; } }
     private new void Start() {
         base.Start();
@@ -29,4 +30,5 @@ public class BrokenNicoInteractable : ItemTaker
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
         pickupable.ShowPopup();  // You'll be touching Nico when you fix him, so...
     }
+
 }

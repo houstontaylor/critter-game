@@ -1,7 +1,9 @@
 using UnityEngine;
 public class Nico : ItemTaker
 {
+    
     public override string ItemName { get { return "HardDrive"; } }
+
     public override void Interact()
     {
         // Get the cutscene from the hard drive that the player is holding
@@ -34,4 +36,5 @@ public class Nico : ItemTaker
         door.Interact();
         stop.Continue();
     }
+
 }
