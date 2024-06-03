@@ -35,13 +35,18 @@ public class NicoEyes : MonoBehaviour
 
     private void Update()
     {
-        Vector3 targetPos = _playerController.transform.position;
-        _eyeParent.right = targetPos - transform.position;  // Rotate to point towards critter
+        // Calculate direction vector from eyes to player
+        Vector3 direction = (_playerController.transform.position - _eyeParent.position).normalized;
 
-        Vector3 rot = _eyeParent.rotation.eulerAngles;
-        float value = Mathf.Clamp(rot.z + 90, 360 - 20, 360 + 20);  // Amount to rotate
 
-        _eyeParent.transform.rotation = Quaternion.Euler(rot.x, rot.y, value);
+        // Calculate the local position offset for the eye objects
+        Vector3 localOffset = direction;
+
+        // Add a downward offset to the y component of the localOffset
+        localOffset.y -= 2.9f; // You can adjust the value to control the amount of downward offset
+
+        // Apply the local position offset to the eye objects
+        _eyeObject.localPosition = localOffset;
     }
 
 }

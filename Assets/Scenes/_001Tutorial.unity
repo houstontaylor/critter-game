@@ -374,7 +374,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3165650557319090161, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.844552
+      value: 3.3358195
       objectReference: {fileID: 0}
     - target: {fileID: 4196781249250255946, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_FlipX
@@ -578,7 +578,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3165650557319090161, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 1.6756309
+      value: 0.9929712
       objectReference: {fileID: 0}
     - target: {fileID: 4196781249250255946, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_Size.x
@@ -1323,7 +1323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b9e3c5e30b464228bcb174076f60cd2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  darkTint: {r: 0.2784314, g: 0.2784314, b: 0.2784314, a: 1}
+  darkTint: {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
   firstDuration: 1
   secondDuration: 1
   startDark: 1
@@ -3911,7 +3911,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3165650557319090161, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_SpriteTilingProperty.newSize.y
-      value: 0.80246663
+      value: 2.5122652
       objectReference: {fileID: 0}
     - target: {fileID: 4196781249250255946, guid: 2723235dc85283444863aefec537b912, type: 3}
       propertyPath: m_Size.x
@@ -4537,7 +4537,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 850352388521760106, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
       propertyPath: m_Size.x
-      value: 5.853325
+      value: 6.501915
       objectReference: {fileID: 0}
     - target: {fileID: 850352388521760106, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
       propertyPath: m_Size.y
@@ -4550,6 +4550,10 @@ PrefabInstance:
     - target: {fileID: 850352388521760106, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
       propertyPath: m_Offset.y
       value: -0.8773861
+      objectReference: {fileID: 0}
+    - target: {fileID: 850352388521760106, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3609340098036012827, guid: db4e4be71c15d21419ddb990751aead5, type: 3}
       propertyPath: m_LocalPosition.x

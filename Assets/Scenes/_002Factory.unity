@@ -205,6 +205,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Rail
       objectReference: {fileID: 0}
+    - target: {fileID: 4214130186525618486, guid: 679bdc1a1e6e58146917c2a4a1d4e84b, type: 3}
+      propertyPath: m_Parameters.widthMultiplier
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6842740389487546096, guid: 679bdc1a1e6e58146917c2a4a1d4e84b, type: 3}
       propertyPath: m_LocalPosition.x
       value: -11
@@ -4387,6 +4391,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1402357339}
     m_Modifications:
+    - target: {fileID: 504139336249581255, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.69
+      objectReference: {fileID: 0}
     - target: {fileID: 655893925739875859, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
       propertyPath: m_Name
       value: Nico
@@ -4397,7 +4405,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4663373777761218076, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.1148415
+      value: -3.37
       objectReference: {fileID: 0}
     - target: {fileID: 4663373777761218076, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
       propertyPath: m_LocalPosition.z
@@ -4430,6 +4438,10 @@ PrefabInstance:
     - target: {fileID: 4663373777761218076, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6041546425565520804, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0.45000005
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 8223115021975013243, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
@@ -4927,7 +4939,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1444313319603235557, guid: 47efa0535a284d1ff9f87adc86c5f377, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -12.94
+      value: -11.49
       objectReference: {fileID: 0}
     - target: {fileID: 1444313319603235557, guid: 47efa0535a284d1ff9f87adc86c5f377, type: 3}
       propertyPath: m_LocalPosition.y
@@ -4964,6 +4976,10 @@ PrefabInstance:
     - target: {fileID: 1444313319603235557, guid: 47efa0535a284d1ff9f87adc86c5f377, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6142088005867104283, guid: 47efa0535a284d1ff9f87adc86c5f377, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.53
       objectReference: {fileID: 0}
     - target: {fileID: 8390194338556693544, guid: 47efa0535a284d1ff9f87adc86c5f377, type: 3}
       propertyPath: m_Name
