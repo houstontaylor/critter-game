@@ -25,11 +25,16 @@ public abstract class Interactable : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (!ShouldShowPopup()) { return;  }
-        IsInteractable = true;
         if (PopupObject != null && collision.gameObject.CompareTag("Player"))
         {
-            PopupObject.SetActive(true);
+            ShowPopup();
         }
+    }
+
+    public void ShowPopup()
+    {
+        IsInteractable = true;
+        PopupObject.SetActive(true);
     }
 
     /// <summary>

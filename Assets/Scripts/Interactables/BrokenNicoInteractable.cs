@@ -27,6 +27,6 @@ public class BrokenNicoInteractable : ItemTaker
         Destroy(this); // removes this script
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
-
+        pickupable.ShowPopup();  // You'll be touching Nico when you fix him, so...
     }
 }
