@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5e3102c2a7785da4eb16761809d2523f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: b16c26e699ac7084ea2f4e8591334fb5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -94,10 +94,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4663373777761218076}
   - component: {fileID: 2213176781363601949}
+  - component: {fileID: 8905333041955990680}
+  - component: {fileID: 4604025307256612446}
   - component: {fileID: -8832967707572270393}
-  - component: {fileID: 9131964541537191767}
   m_Layer: 0
-  m_Name: Nico
+  m_Name: NicoBroken
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -165,6 +166,45 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 4, y: 4}
   m_EdgeRadius: 0
+--- !u!114 &8905333041955990680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655893925739875859}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82a2c0d0b1b6c3ae6b5e99a39d77afc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PopupObject: {fileID: 3751398591835928754}
+  IsInteractable: 0
+  _playerController: {fileID: 0}
+  freedNicoSprite: {fileID: 21300000, guid: 5e3102c2a7785da4eb16761809d2523f, type: 3}
+  powerUpSound: {fileID: 8300000, guid: 2c294e6f3872c4189972b999222a231c, type: 3}
+  powerUpVolume: 0.5
+--- !u!95 &4604025307256612446
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 655893925739875859}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 5e2cf2b001480514ea70ea105c88f567, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!82 &-8832967707572270393
 AudioSource:
   m_ObjectHideFlags: 0
@@ -261,21 +301,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9131964541537191767
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 655893925739875859}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 975e63f29d9a32692ab0a88da9566906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PopupObject: {fileID: 3751398591835928754}
-  IsInteractable: 0
-  _playerController: {fileID: 0}
 --- !u!1 &3751398591835928754
 GameObject:
   m_ObjectHideFlags: 0
