@@ -71,4 +71,13 @@ public class Rail : MonoBehaviour
         }
     }
 
+    void OnDrawGizmos() {
+        _controlPoints = transform.Find("ControlPoints").GetComponentsInChildren<RailControlPoint>();
+        for (int i = 0; i < _controlPoints.Length - 1; i++)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(_controlPoints[i].transform.position, _controlPoints[i+1].transform.position);
+        }
+    }
+
 }

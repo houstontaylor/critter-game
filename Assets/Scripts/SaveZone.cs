@@ -95,6 +95,13 @@ public class SaveZone : MonoBehaviour
         {
             Gizmos.DrawLine(transform.position, obj.transform.position);
         }
+        
+        // Connect to the rail control point
+        if (railControlPoint != null)
+        {
+            Gizmos.color = new Color(1f, 0.25f, 0.25f);
+            Gizmos.DrawLine(transform.position, railControlPoint.transform.position);
+        }
     }
 
 }

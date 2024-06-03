@@ -11,7 +11,7 @@ public class RailControlPoint : MonoBehaviour
     void OnDrawGizmos()
     {
         Gizmos.color = isStop ? Color.red : Color.green;
-        Gizmos.DrawWireSphere(transform.position, 0.25f);
+        Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 
     public void Continue() {
