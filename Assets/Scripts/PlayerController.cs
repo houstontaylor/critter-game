@@ -96,10 +96,7 @@ public class PlayerController : MonoBehaviour
     public void Respawn()
     {
         // If you're holding anything, drop it
-        if (holding != null)
-        {
-            holding.transform.SetParent(null);
-        }
+        Drop();
         // Reset the location of the player
         transform.position = LastRecordedSpawnLocation;
         _rb2D.velocity = Vector3.zero;
