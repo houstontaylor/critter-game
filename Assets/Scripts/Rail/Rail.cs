@@ -42,6 +42,7 @@ public class Rail : MonoBehaviour
                 // Reaches a stop, stop moving until told to move again
                 return;
             }
+            _controlPoints[currentControlPoint].Trigger();
             currentControlPoint++;
             if (currentControlPoint >= _controlPoints.Length) {
                 // Reached the end of the rail; dismount
