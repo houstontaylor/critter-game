@@ -1909,30 +1909,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5839312518620043528, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_SortingOrder
-      value: -2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041942594401629391, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.21120371
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041942594401629391, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.28404847
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041942594401629391, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.105601855
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041942594401629391, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0.03
-      objectReference: {fileID: 0}
-    - target: {fileID: 6041942594401629391, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -0.63
-      objectReference: {fileID: 0}
     - target: {fileID: 7644221474448973309, guid: 36e0b042db5a1754d85f44db8fdbff95, type: 3}
       propertyPath: m_Name
       value: Door
