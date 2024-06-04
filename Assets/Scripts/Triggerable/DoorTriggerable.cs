@@ -9,6 +9,9 @@ public class DoorTriggerable : Triggerable
     public Vector3 PositionToMove;
     public float SecondsToAnimate;
 
+    [Header("Object Assignments")]
+    [SerializeField] private ParticleSystem _pSystem;
+
     public override void Interact()
     {
         StartCoroutine(MoveToPositionCoroutine(SecondsToAnimate));
@@ -20,12 +23,13 @@ public class DoorTriggerable : Triggerable
     /// </summary>
     private IEnumerator MoveToPositionCoroutine(float secs)  // lol sex
     {
+        _pSystem.Emit(6);
         Vector3 startPos = transform.position;
         Vector3 destPos = startPos + PositionToMove;
         float currTime = 0;
         while (currTime < secs)
         {
-            transform.position = Vector3.Lerp(startPos, destPos, currTime / secs);
+            transform.position = Vector3.Lerp(startPos, destPos, Mathf.SmoothStep(0, 1, currTime / secs));
             currTime += Time.deltaTime;
             yield return null;
         }
