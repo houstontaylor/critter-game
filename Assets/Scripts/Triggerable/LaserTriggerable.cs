@@ -131,6 +131,17 @@ public class Laser : Triggerable
 
     public void Reset()
     {
+        if (_isLaserActive == _initialLaserActive) {
+            // Needed to prevent stack overflow
+            // Laser.Reset
+            // -> Laser.IsLaserActive.set
+            // -> Laser.UpdateLaser
+            // -> PlayerController.Respawn
+            // -> PlayerController.OnDeath
+            // -> SaveZone.ResetObjects
+            // -> Laser.Reset
+            return;
+        }
         IsLaserActive = _initialLaserActive;
     }
 
