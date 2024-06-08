@@ -6,6 +6,7 @@ public class BrokenNicoInteractable : ItemTaker
     public AudioClip powerUpSound;
     public float powerUpVolume;
     private AudioSource audioSource;
+    public Cutscene cutsceneToTrigger;
 
     private NicoEyes _nicoEyes;
 
@@ -36,6 +37,12 @@ public class BrokenNicoInteractable : ItemTaker
         Pickupable pickupable = gameObject.AddComponent<Pickupable>();
         pickupable.PopupObject = PopupObject; // Needed to set up the script properly
         pickupable.ShowPopup();  // You'll be touching Nico when you fix him, so...
+
+        // Start cutscene if exists
+        if (cutsceneToTrigger != null)
+        {
+            cutsceneToTrigger.Play();
+        }
     }
 
 }

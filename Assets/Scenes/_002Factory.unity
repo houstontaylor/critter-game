@@ -3399,6 +3399,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 43b5b962d13677544b9fda260936cce7, type: 3}
+--- !u!114 &1153189811 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8271853990215371947, guid: 43b5b962d13677544b9fda260936cce7, type: 3}
+  m_PrefabInstance: {fileID: 1153189810}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 660b862b7ac94ea59afcac901c978748, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1166228108
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4541,6 +4552,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.45000005
       objectReference: {fileID: 0}
+    - target: {fileID: 8905333041955990680, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
+      propertyPath: cutsceneToTrigger
+      value: 
+      objectReference: {fileID: 1153189811}
     m_RemovedComponents:
     - {fileID: 8223115021975013243, guid: 295d34b9c784e7a5b98a5c2c600f6156, type: 3}
     m_RemovedGameObjects: []
