@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Cutscene : MonoBehaviour
 {
 
+    [Header("Object Assignments")]
+    public GameObject SlideBackground;
     [Header("Cutscene Properties")]
     public float SlideFadeInAnimationTime = 1;  // How long it will take to fade in the slide
     public float SlideShowTime = 2;  // How long the slide will be showing for
@@ -58,12 +60,19 @@ public class Cutscene : MonoBehaviour
             childImage.color = Color.clear;
             child.gameObject.SetActive(true);
             yield return AnimateSlideCoroutine(childImage);
+            // If past the first child, show the background
+            if (i == 0)
+            {
+                SlideBackground.SetActive(true);
+            }
             // On the last child, wait for the last slide to fade out
             if (i == transform.childCount - 1)
             {
+                SlideBackground.SetActive(false);
                 yield return new WaitForSeconds(SlideFadeInAnimationTime);
             }
         }
+        SlideBackground.SetActive(false);  // Hide the slide background just in case
         gameObject.SetActive(false);  // Re-hide this object afterwards
     }
 
