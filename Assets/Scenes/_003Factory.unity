@@ -1644,11 +1644,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3243572729493632226, guid: 7af11914463ab4d86b9c3638121989df, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.51
+      value: 8.7
       objectReference: {fileID: 0}
     - target: {fileID: 3243572729493632226, guid: 7af11914463ab4d86b9c3638121989df, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3
+      value: 3.89
       objectReference: {fileID: 0}
     - target: {fileID: 3243572729493632226, guid: 7af11914463ab4d86b9c3638121989df, type: 3}
       propertyPath: m_LocalPosition.z
@@ -2481,12 +2481,16 @@ PrefabInstance:
       objectReference: {fileID: 407598469}
     - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: ObjectsToReset.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
       propertyPath: ObjectsToReset.Array.data[0]
       value: 
       objectReference: {fileID: 471167815}
+    - target: {fileID: 7205563887011845667, guid: 1ad3b304218b74b499f879167fdf6540, type: 3}
+      propertyPath: ObjectsToReset.Array.data[1]
+      value: 
+      objectReference: {fileID: 1985949028}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -7618,6 +7622,11 @@ PrefabInstance:
 --- !u!4 &1985949027 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 168136319743252231, guid: 7f0c2c9f840cf4a26a3c3454428fa517, type: 3}
+  m_PrefabInstance: {fileID: 1985949026}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1985949028 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4955258354162537224, guid: 7f0c2c9f840cf4a26a3c3454428fa517, type: 3}
   m_PrefabInstance: {fileID: 1985949026}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1987360383
