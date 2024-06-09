@@ -1783,6 +1783,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   height: 0.75
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &383743973
 GameObject:
   m_ObjectHideFlags: 3
@@ -4800,9 +4801,9 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 83cd7bf942060fb47910e3fdbce93447, type: 3}
+  m_audioClip: {fileID: 8300000, guid: 4de4383e1739f4b1f8c5c318251e32a8, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.04
+  m_Volume: 0.2
   m_Pitch: 1
   Loop: 1
   Mute: 0
