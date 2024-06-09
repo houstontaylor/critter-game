@@ -93,6 +93,7 @@ public class SaveZone : MonoBehaviour
 
         foreach (GameObject obj in ObjectsToReset)
         {
+            if (obj == null) continue;
             Gizmos.DrawLine(transform.position, obj.transform.position);
         }
         
