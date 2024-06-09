@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 67890422386162081}
   - component: {fileID: 5258603824456926545}
   - component: {fileID: 2189206217655997177}
+  - component: {fileID: 5012895115268858582}
   m_Layer: 0
   m_Name: HardDrive
   m_TagString: Untagged
@@ -181,6 +182,21 @@ MonoBehaviour:
   cutscene: {fileID: 0}
   stop: {fileID: 0}
   door: {fileID: 0}
+--- !u!114 &5012895115268858582
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2174511861227413774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b816b67b01cec7f4d8e15efbeaa94f93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 3
+  height: 0.1
+  startPosition: {x: 0, y: 0, z: 0}
 --- !u!1 &6235361987080850877
 GameObject:
   m_ObjectHideFlags: 0
@@ -431,9 +447,9 @@ MonoBehaviour:
   m_margin: {x: 0, y: 0, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
-  _SortingLayer: 0
-  _SortingLayerID: 0
-  _SortingOrder: 0
   m_hasFontAssetChanged: 0
   m_renderer: {fileID: 7472685096309923679}
   m_maskType: 0
+  _SortingLayer: 0
+  _SortingLayerID: 0
+  _SortingOrder: 0

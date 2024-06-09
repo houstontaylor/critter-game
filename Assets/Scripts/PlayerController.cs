@@ -35,12 +35,21 @@ public class PlayerController : MonoBehaviour
             Drop();
         }
         holding = item;
+        item.TryGetComponent<BounceImage>(out BounceImage bounceImage);
+        if (bounceImage != null) {
+            bounceImage.enabled = false;
+        }
         item.transform.SetParent(transform);
     }
 
     public void Drop() {
         if (holding == null) {
             return;
+        }
+        holding.TryGetComponent<BounceImage>(out BounceImage bounceImage);
+        if (bounceImage != null) {
+            bounceImage.enabled = true;
+            bounceImage.startPosition = holding.transform.position;
         }
         holding.transform.SetParent(null);
         holding = null;
